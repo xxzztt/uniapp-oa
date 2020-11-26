@@ -11,13 +11,13 @@ Uni-OA通用办公系统主要为国内企业提供办公自动化信息服务�
 
 1. 后台演示：请联系作者
 2. 手机端演示：测试账号密码 18986868888/18986868888 管理账号 13277562585/hjp12321
-![](http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/11/23/image_1606146357_mz3LWWi7.png)
+![image](http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/11/23/image_1606146357_mz3LWWi7.png)
 
 ### 部分截图
 
-![](http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/11/24/image_1606211083_EqU6kbWZ.png)
+![image](http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/11/24/image_1606211083_EqU6kbWZ.png)
 
-![](http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/11/24/image_1606211322_EyAAx6i0.png)
+![image](http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/11/24/image_1606211322_EyAAx6i0.png)
 
 ### 开始使用
 
