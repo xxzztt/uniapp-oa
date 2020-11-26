@@ -15,9 +15,7 @@ Uni-OA通用办公系统主要为国内企业提供办公自动化信息服务�
 
 ### 部分截图
 
-![image](https://www.enshiwang.net/html5/images/image_1606211083_EqU6kbWZ.png)
-
-![image](https://www.enshiwang.net/html5/images/image_1606211322_EyAAx6i0.png)
+见docs/images文件夹
 
 ### 开始使用
 
