@@ -134,7 +134,6 @@
 				this.typeindex = e.target.value
 			},
 			handleStateChange(e) {
-				// this.stateindex = e.target.value
 				this.sendDate.state = e.detail.value;
 			},
 			bindInsuranceChange(e) {
@@ -160,7 +159,6 @@
 						this.typeindex = r.data.type;
 						this.inspection = r.data.inspection;
 						this.insurance = r.data.insurance;
-						// console.log(this.sendDate);
 						this.imageList = JSON.parse(r.data.covers);
 						uni.setNavigationBarTitle({
 							title: r.data.title

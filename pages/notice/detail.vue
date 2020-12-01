@@ -52,7 +52,6 @@ export default {
 		})
 	},
 	onLoad(event) {
-		// console.log(uni.getStorageSync('userInfo').merchant.company_name);
 		this.id = event.id;
 		this.getNotifyAnnounceView(event.id);
 	},

@@ -155,10 +155,7 @@ export default {
 				});
 			}else{
 			this.btnLoading = true;
-			// this.sendDate.type = this.mtype;
 			this.sendDate.covers = JSON.stringify(this.imageList);
-			// await this.getPlace(this.sendDate.label);
-			// console.log(this.sendDate);
 			await this.$http
 				.post(`${check}`+`/create`, {
 					...this.sendDate

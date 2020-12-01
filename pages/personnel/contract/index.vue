@@ -14,19 +14,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in getList" :key="index" class="row" @tap="navTo(`/pages/personnel/contract/detail?id=${item.id}`)">
-				<view class="carrier">
-					<view class="get-wrapper">
-						<view class="title in1line">
-							[<template v-for="(cates, index) in contractType">
-								<template v-if="cates.key==item.cate_id">{{ cates.value }}</template>
-							</template>]{{ item.title }}
-						</view>
-						<view class="content in2line">甲方:{{item.PartyA}} <br>乙方:{{item.PartyB}} </view>
-						<view class="time">签定时间:{{item.date}}</view>
-					</view>
-				</view>
-			</view> -->
+			
 		</view>
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/personnel/contract/add`)">
 			<text class="cuIcon-add text-xxl"></text>
@@ -82,7 +70,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

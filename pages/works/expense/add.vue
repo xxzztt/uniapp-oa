@@ -161,7 +161,6 @@ export default {
 						_this.imageList.push(r.data.url);
 					});
 			});
-			// console.log(_this.imageList);
 		},
 		// 删除已选中图片
 		close(e) {
@@ -170,11 +169,9 @@ export default {
 		// 发送数据
 		async send() {
 			this.btnLoading = true;
-			// this.sendDate.type = this.mtype;
 			this.sendDate.cate_id = this.mtypeValue;
 			this.sendDate.covers = JSON.stringify(this.imageList);
 			this.sendDate.status = 'expense/apply';
-			// console.log(this.sendDate);
 			await this.$http
 				.post(`${expense}`+`/create`, {
 					...this.sendDate

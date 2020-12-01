@@ -86,7 +86,6 @@ export default {
 						this.sendDate = r.data;
 						this.typeindex = r.data.type;
 						this.date = r.data.date;
-						// console.log(this.sendDate);
 						uni.setNavigationBarTitle({
 							title: r.data.title
 						});

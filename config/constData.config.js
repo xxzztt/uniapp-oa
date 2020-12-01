@@ -1,54 +1,10 @@
 export default {
 	// app应用名称
-	appName: '通用办公',
-
-	// 购物车在tab的位置
-	// cartIndex: 3,
-
-	// 消息在tab的位置
-	// worksIndex: 2,
+	appName: '景区办公',
 
 	// 验证码发送间隔
 	sendCodeTime: 60,
 
-	// 金额符号
-	moneySymbol: '￥',
-
-	// 单商品替代词
-	singleSkuText: '基础款',
-
-
-
-// 机构中心-机构统计 e07472 ff4757 ff6b81
-	timeList: [{
-			icon: 'icondingqifangtan',
-			url: '/pages/set/unit/index',
-			title: '本周',
-			value: '',
-			color: '#ff6b81'
-		},
-		{
-			icon: 'iconvideo',
-			url: '/pages/set/unit/index',
-			title: '本月',
-			value: '',
-			color: '#ff6b81'
-		},
-		{
-			icon: 'iconhuiyi',
-			url: '/pages/set/unit/index',
-			title: '今年',
-			value: '',
-			color: '#ff6b81'
-		},
-		{
-			icon: 'iconhuiyi',
-			url: '/pages/set/unit/index',
-			title: '去年',
-			value: '',
-			color: '#ff6b81'
-		},
-	],
 	// 设置-设置中心
 	setList: [
 		{
@@ -89,11 +45,7 @@ export default {
 			url: '/pages/set/feedback/list',
 			content: ''
 		},
-		{
-			title: '客服咨询',
-			url: '/pages/service/index',
-			content: ''
-		},
+		
 	],
 
 	//应用中心-工作流

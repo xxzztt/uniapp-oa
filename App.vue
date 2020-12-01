@@ -42,8 +42,8 @@ export default {
 			}
 			if (this.$mStore.getters.hasLogin) {
 				// 初始化Websocket
-				await this.$mWebsocket.initWebsocket();
-				// 初始化购物车数量
+				// await this.$mWebsocket.initWebsocket();
+				// 初始化数量
 				this.setNotifyNum(uni.getStorageSync('notifyNum') || 0);
 				// #ifdef APP-PLUS
 				const info = plus.push.getClientInfo();
@@ -68,7 +68,6 @@ export default {
 					// #endif
 					// #ifdef MP-WEIXIN
 					Vue.prototype.StatusBar = e.statusBarHeight;
-					// eslint-disable-next-line
 					const custom = wx.getMenuButtonBoundingClientRect();
 					Vue.prototype.Custom = custom;
 					Vue.prototype.CustomBar = custom.top - e.statusBarHeight;
@@ -80,9 +79,7 @@ export default {
 				}
 			});
 		},
-		// 初始化通用配置
 
-		// 初始化全局配置
 
 		// 设备绑定(app推送)
 		async handleBindingEquipment(id, token) {
@@ -95,7 +92,6 @@ export default {
 		},
 		async handleVerifyAccessToken (token) {
 			 await this.$http.post(verifyAccessToken, { token }).then(r => {
-				 // console.log(r.data);
 				 if (!r.data.token) {
 								this.$mStore.commit('logout');
 				 }
@@ -107,33 +103,7 @@ export default {
 			const id = item.target_id;
 			const type = item.target_type;
 			switch (type) {
-				case 'order_consign':
-				case 'order_stock_up_accomplish':
-				case 'order_return_money':
-				case 'order_bargain_accomplish':
-					route = `/pages/order/detail?id=${id}`;
-					break;
-				case 'order_wholesale_open':
-				case 'order_wholesale_join':
-				case 'order_wholesale_accomplish':
-				case 'order_wholesale_close':
-					route = `/pages/marketing/wholesale/detail?id=${id}`;
-					break;
-				case 'order_bargain_friend_join':
-					route = `/pages/marketing/bargain/detail?id=${id}`;
-					break;
-				case 'order_bargain_close':
-					route = `/pages/marketing/bargain/detail?id=${id}`;
-					break;
-				case 'coupon_give':
-					route = '/pages/user/coupon/coupon?type=1';
-					break;
-				case 'order_virtual':
-				case 'order_virtual_card':
-				case 'order_virtual_network_disk':
-				case 'order_virtual_download':
-          route = `/pages/user/virtual/detail?id=${id}`;
-					break;
+				
 				default:
 					route = '/pages/index/index';
 					break;

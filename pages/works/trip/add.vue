@@ -98,14 +98,13 @@ export default {
 		})
 	},
 	async onLoad(options) {
-		// await this.getworksType();
 	},
 	methods: {
 		// 监听反馈类型事件
 		handleRemindTypeChange(e) {
 			this.sendDate.remind = e.detail.value;
 		},
-// 监听日期更改
+		// 监听日期更改
 			bindDateChange(e) {
 				this.begin_date = e.target.value;
 			},

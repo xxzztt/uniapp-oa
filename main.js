@@ -8,7 +8,7 @@ import $mConfig from '@/config/index.config.js';
 import $mRoutesConfig from '@/config/routes.config.js';
 import $mFormRule from '@/config/formRule.config.js';
 import $mConstDataConfig from '@/config/constData.config.js';
-import $mWebsocketConfig from '@/config/websocket.config.js';
+// import $mWebsocketConfig from '@/config/websocket.config.js';
 import $mSettingConfig from '@/config/setting.config.js';
 // 引入全局方法
 import { http } from '@/utils/request';
@@ -16,7 +16,7 @@ import $mGraceChecker from '@/utils/graceChecker';
 import $mHelper from '@/utils/helper';
 import $mRouter from '@/utils/router';
 import $mPayment from '@/utils/payment';
-import $mWebsocket from '@/utils/websocket';
+// import $mWebsocket from '@/utils/websocket';
 // 全局组件
 import rfImage from '@/components/oa-image/oa-image';
 import rfEmpty from '@/components/oa-empty';
@@ -45,14 +45,14 @@ Vue.prototype.$mAssetsPath = $mAssetsPath;
 Vue.prototype.$mFormRule = $mFormRule;
 Vue.prototype.$mRoutesConfig = $mRoutesConfig;
 Vue.prototype.$mConstDataConfig = $mConstDataConfig;
-Vue.prototype.$mWebsocketConfig = $mWebsocketConfig;
+// Vue.prototype.$mWebsocketConfig = $mWebsocketConfig;
 Vue.prototype.$mSettingConfig = $mSettingConfig;
 
 Vue.prototype.$mGraceChecker = $mGraceChecker;
 Vue.prototype.$mHelper = $mHelper;
 Vue.prototype.$mRouter = $mRouter;
 Vue.prototype.$mPayment = $mPayment;
-Vue.prototype.$mWebsocket = $mWebsocket;
+// Vue.prototype.$mWebsocket = $mWebsocket;
 
 Vue.component('rfImage', rfImage);
 Vue.component('rfEmpty', rfEmpty);

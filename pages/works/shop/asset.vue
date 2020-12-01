@@ -36,7 +36,8 @@
 	import oaEmpty from '@/components/oa-empty';
 	export default {
 		components: {
-			rfLoadMore,oaEmpty
+			rfLoadMore,
+			oaEmpty
 		},
 		data() {
 			return {
@@ -59,7 +60,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新
@@ -131,10 +131,10 @@
 					});
 			},
 			navTo(item) {
-					this.$mRouter.push({
-						route: `/pages/works/shop/add?id=${item.id}`
-					});
-				
+				this.$mRouter.push({
+					route: `/pages/works/shop/add?id=${item.id}`
+				});
+
 			}
 		}
 	};

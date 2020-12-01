@@ -1,9 +1,5 @@
 <template>
 	<view class="page">
-		<!-- <view class="input-t" @tap.stop="chooseType">
-			<text>类型</text>
-			<text class="input-quick">{{ type || '请选择日程类型' }} <text class="iconfont iconxia"></text></text>
-		</view> -->
 		<view class="input-t ">
 			<text>类型</text>
 			<view class="tit">
@@ -128,25 +124,13 @@ export default {
 					this.type = r.data;
 				})
 		},
-		// chooseType() {
-		// 	uni.showActionSheet({
-		// 		itemList: this.worksType,
-		// 		success: res => {
-		// 			this.type = this.worksType[res.tapIndex];
-		// 			this.typeValue = res.tapIndex;
-		// 		},
-		// 		fail: res => {
-		// 			console.log(res);
-		// 		}
-		// 	});
-		// },
+		
 		// 发送数据
 		async send() {
 			this.btnLoading = true;
 			this.sendDate.type = this.typeindex;
 			this.sendDate.begin_date = this.begin_date;
 			this.sendDate.end_date = this.end_date;
-			// console.log(this.sendDate);
 			await this.$http
 				.post(`${calendar}`+`/create`, {
 					...this.sendDate

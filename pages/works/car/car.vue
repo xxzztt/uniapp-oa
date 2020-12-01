@@ -60,7 +60,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

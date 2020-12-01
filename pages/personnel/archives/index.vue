@@ -14,19 +14,6 @@
 						</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in getList" :key="index" class="row" >
-				<view class="carrier">
-					<view class="get-wrapper">
-						<view class="title in1line">
-							[<template v-for="(cates, index) in archivesType">
-								<template v-if="cates.key==item.cate_id">{{ cates.value }}</template>
-							</template>]{{ item.title }}
-						</view>
-						<view class="content in2line">文件柜编号:{{item.cabinet}} 文件盒编号:{{item.box}}<br>档案编号:{{item.serial}}</view>
-						<view class="time">发文时间:{{item.send_time}}</view>
-					</view>
-				</view>
-			</view> -->
 		</view>
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/personnel/archives/add`)">
 			<text class="cuIcon-add text-xxl"></text>
@@ -79,7 +66,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

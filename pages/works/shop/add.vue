@@ -5,26 +5,16 @@
 			<text class="input-quick">{{ asset.title  || '请选择要申购的资产' }}</text>
 		</view>
 		<view class="input-t ">
-			<text >数量</text>
-			<input
-				class="input tit"
-				type="text"
-				v-model="sendDate.num"
-				placeholder="请输入整数"
-				placeholder-class="placeholder"
-			/>
+			<text>数量</text>
+			<input class="input tit" type="text" v-model="sendDate.num" placeholder="请输入整数" placeholder-class="placeholder" />
 		</view>
 		<view class="input-t">
 			<text>申购原因</text>
 			<text class="input-quick"></text>
 		</view>
 		<view class="input-body">
-			<textarea
-				placeholder="请详细描述您要申购的原因..."
-				v-model="sendDate.content"
-				class="input-textare"
-			/>
-		</view>
+			<textarea placeholder="请详细描述您要申购的原因..." v-model="sendDate.content" class="input-textare" />
+			</view>
 		<view class="input-t">
 			<text>提醒方式</text>
 		</view>
@@ -108,10 +98,8 @@ export default {
 		// 发送数据
 		async send() {
 			this.btnLoading = true;
-			// this.sendDate.type = this.mtype;
 			this.sendDate.asset_id = this.asset_id;
 			this.sendDate.status = 'shop/apply';
-			// console.log(this.sendDate);
 			await this.$http
 				.post(`${shop}`+`/create`, {
 					...this.sendDate

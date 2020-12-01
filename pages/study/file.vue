@@ -57,9 +57,6 @@ export default {
 			return moment(val * 1000).format('YYYY-MM-DD HH:mm');
 		},
 	},
-	// onShow() {
-	// 	this.initData();
-	// },
 
 	// 下拉刷新
 	onPullDownRefresh() {

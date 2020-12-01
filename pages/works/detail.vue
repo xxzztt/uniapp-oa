@@ -1,18 +1,6 @@
 <template>
 	<view class="oa-notice-detail">
-		<!-- <view class="feedback-title ">
-			<text>审核状态</text>
-			<template v-for="(works, index) in workState">
-				<template v-if="works.key==worksDetail.state">{{ works.value }}</template>
-			</template>
-		</view>
- -->
-		<!-- <view class="feedback-title">
-			<text>申请理由</text>
-		</view>
-		<view class="feedback-body">
-			<textarea v-model="worksDetail.content" class="feedback-textare" />
-		</view> -->
+
 		<view class="input-title">
 			<text>{{worksDetail.content}}</text>
 		</view>
@@ -166,10 +154,7 @@
 					}
 				});
 		},
-
-			// 通过
-			async handleWorksOperation(status) {
-				// console.log(this.sendDate.suggest);
+		async handleWorksOperation(status) {
 				await this.$http.put(`${worksDetail}`+'/update?id='+`${this.approveId}`, {status: status,suggest:this.sendDate.suggest}).then(() => {
 					this.$mHelper.toast('操作成功');
 					this.$mRouter.back();

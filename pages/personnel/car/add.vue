@@ -24,13 +24,7 @@
 			<text>里程(KM)</text>
 			<input class="input tit" type="text" v-model="sendDate.mileage" placeholder="请输入里程数" placeholder-class="placeholder" />
 		</view>
-		<!-- <view class="cu-form-group">
-			<view >状态</view>
-				<radio-group  @change="handleClassesChange">
-					<label class="radio margin-right" v-for="(item, index) in classesType" :key="index"><radio :value="item.key"
-						:checked="item.key === sendDate.classes_id" :color="themeColor.color"  style="transform: scale(0.75);"/>{{ item.value }}</label>
-				</radio-group>
-		</view> -->
+		
 		<view class="input-t ">
 			<text>保险到期</text>
 			<picker mode="date" v-model="sendDate.insurance" @change="bindInsuranceChange">
@@ -146,7 +140,6 @@
 				this.typeindex = e.target.value
 			},
 			handleStateChange(e) {
-				// this.stateindex = e.target.value
 				this.sendDate.state = e.detail.value;
 			},
 			bindInsuranceChange(e) {

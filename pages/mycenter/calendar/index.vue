@@ -15,20 +15,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in calendarList" :key="index" class="row" >
-				<view class="carrier">
-					<view class="calendar-wrapper">
-						<view class="title in1line">
-							{{item.content}}
-							[<template v-for="(cates, index) in workType">
-								<template v-if="cates.key==item.type">{{ cates.value }}</template>
-							</template>]
-						</view>
-						<view class="content in2line">地点:{{item.address}} 参与人:{{item.attend}} <br>开始时间{{item.begin_date}} 结束时间{{item.end_date}}</view>
-						<view class="time">{{item.member.realname}} {{item.created_at | time}}</view>
-					</view>
-				</view>
-			</view> -->
+		
 		</view>
 
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/mycenter/calendar/add`)">

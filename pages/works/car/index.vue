@@ -5,7 +5,6 @@
 				<view class="carrier">
 					<view class="get-wrapper">
 						<view class="title in1line">
-							<!-- {{ item.state | workStateFilter }} -->
 							<template v-for="(works, index) in workState">
 								<template v-if="works.key==item.state">{{ works.value }}</template>
 							</template>
@@ -32,7 +31,6 @@
 	import {
 		carApply,
 		workState,
-		// getCarType
 	} from '@/api/basic';
 	import rfLoadMore from '@/components/oa-load-more/oa-load-more';
 	import moment from '@/common/moment';
@@ -65,7 +63,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新
@@ -91,7 +88,6 @@
 				this.getList.length = 0;
 				this.getworksList();
 				this.getworkState();
-				// this.getworkType();
 				uni.setNavigationBarColor({
 					frontColor: '#ffffff',
 					backgroundColor: this.themeColor.color,
@@ -115,20 +111,7 @@
 						}
 					});
 			},
-			//获取类型
-			// async getworkType() {
-			// 	await this.$http
-			// 		.get(`${getCarType}`, {})
-			// 		.then(r => {
-			// 			this.workType = r.data;
-			// 		})
-			// 		.catch(() => {
-			// 			this.loading = false;
-			// 			if (mtype === 'refresh') {
-			// 				uni.stopPullDownRefresh();
-			// 			}
-			// 		});
-			// },
+			
 			// 获取列表
 			async getworksList(type) {
 				await this.$http

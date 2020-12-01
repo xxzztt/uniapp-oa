@@ -5,12 +5,11 @@
 				<view class="carrier">
 					<view class="get-wrapper">
 						<view class="title in1line">
-							<!-- {{ item.state | workStateFilter }} -->
 							<template v-for="(cates, index) in workType">
 								<template v-if="cates.key==item.cate_id">{{ cates.value }}</template>
 							</template>
 							-
-							<template v-for="(works, index) in workState" >
+							<template v-for="(works, index) in workState">
 								<template v-if="works.key==item.state">{{ works.value }}</template>
 							</template>
 						</view>
@@ -45,7 +44,8 @@
 	import oaEmpty from '@/components/oa-empty';
 	export default {
 		components: {
-			rfLoadMore,oaEmpty
+			rfLoadMore,
+			oaEmpty
 		},
 		data() {
 			return {
@@ -169,8 +169,10 @@
 			font-weight: 100;
 			font-size: 80rpx;
 		}
+
 		.get-list {
 			margin-top: 20upx;
+
 			.row {
 				width: calc(94%);
 				height: calc(22vw + 40upx);

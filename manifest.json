@@ -3,8 +3,8 @@
     "appid" : "",
     // 自行更换uniapp appid 可登录查看uniapp提供的用户统计 https://tongji.dcloud.net.cn/
     "description" : "通用办公自动化解决方案",
-    "versionName" : "1.2.1",
-    "versionCode" : 121,
+    "versionName" : "1.2.2",
+    "versionCode" : 122,
     "transformPx" : false,
     "app-plus" : {
         "compatible" : {
@@ -229,7 +229,8 @@
         "setting" : {
             "minified" : true
         },
-        "appid" : "1110577006"
+        "appid" : ""
     }
 }
 // 这里添加QQ小程序 appid
+

@@ -203,12 +203,7 @@
 			},
 			// 获取消息列表
 			async getNotifyList(type) {
-				// if (!this.hasLogin) {
-				// 	this.loading = false;
-				// 	if (type === 'refresh') uni.stopPullDownRefresh();
-
-				// 	return;
-				// }
+				
 				await this.$http.get(notifyIndex, {
 					page: this.page
 				}).then(r => {
@@ -216,7 +211,6 @@
 					if (type === 'refresh') {
 						uni.stopPullDownRefresh();
 					}
-					// this.initNotifyNum();
 					this.loadingType = r.data.length === 10 ? 'more' : 'nomore';
 					this.notifyList = [...this.notifyList, ...r.data];
 				}).catch(() => {

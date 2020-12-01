@@ -103,10 +103,8 @@
 			// 数据初始化
 			initData() {
 				this.hasLogin = this.$mStore.getters.hasLogin;
-				// this.getMemberInfo();
 				this.user = uni.getStorageSync('user');
 				this.role = this.user?this.user.member.role_id:1;
-				// console.log(uni.getStorageSync('user').member);
 				uni.setNavigationBarColor({
 					frontColor: '#ffffff',
 					backgroundColor: this.themeColor.color,
@@ -115,17 +113,14 @@
 						timingFunc: 'easeIn'
 					}
 				})
-				// console.log(this.user);
 			},
 			// 获取用户信息
 			async getMemberInfo() {
 				await this.$http
 					.get(memberInfo)
 					.then(async r => {
-						// console.log(r.data);
 						this.loading = false;
 						this.userInfo = r.data;
-						// console.log(r.data);
 					})
 
 			},

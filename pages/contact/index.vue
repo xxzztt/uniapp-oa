@@ -15,22 +15,8 @@
 				</view>
 			</view>
 		</view>
-		<!-- <view class="uni-list">
-			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item, index) in list" :key="index">
-				<view class="uni-media-list" @tap="navTo(`${item.mobile}`)">
-					<image class="uni-media-list-logo "  :src="item.head_portrait|| headImg"></image>
-					<view class="uni-media-list-body">
-						<view class="uni-media-list-text-top" > {{item.realname}} </view>
-						<view class="uni-media-list-text-bottom">
-							<text>部门:{{item.department&&item.department.title }} {{item.role&&item.role.title }}  </text>
-							<text>电话{{item.mobile}}</text>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view> -->
-		<uni-load-more :status="status"  :icon-size="16" :content-text="contentText" />
-		<!-- <rf-load-more v-if="list.length > 0" :status="loadingType" /> -->
+		
+		<uni-load-more :status="status"  :icon-size="16"  />
 		<rf-empty :info="'还没有内容~'" v-if="list.length === 0 && !loading"></rf-empty>
 		<!--加载动画-->
 		<rfLoading isFullScreen :active="loading"></rfLoading>
@@ -43,7 +29,6 @@
 		contact,
 		// getCarType
 	} from '@/api/basic';
-	// import oaLoadMore from '@/components/oa-load-more/oa-load-more';
 	import moment from '@/common/moment';
 	import $mAssetsPath from '@/config/assets.config';
 	import mConstData from '@/config/constData.config';

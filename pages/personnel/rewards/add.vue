@@ -82,7 +82,6 @@
 		methods: {
 			bindTypeChange(e) {
 				this.index = e.detail.value;
-				// console.log(this.employees[this.index].key);
 			},
 			handleTypeChange(e) {
 				this.sendDate.type = e.detail.value;

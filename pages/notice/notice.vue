@@ -2,11 +2,9 @@
 	<view class="secret">
 		<view class="notify-list" >
 			<view  v-for="(item, index) in noticeList" :key="index" class="row" @tap="navTo(item)">
-				<!--  -->
 				<view class="carrier">
 					<view class="notify-wrapper">
 						<view class="title in3line">{{item.notifySenderForMember.title}}</view>
-						<!-- <view class="content in2line"><oa-parser lazy-load :html="item.notifySenderForMember.content"></oa-parser></view> -->
 						<view class="time">{{item.created_at | time}}</view>
 						<view class="un-read" :class="'bg-'+themeColor.name" v-if="item.is_read.toString() === '0'"></view>
 					</view>
@@ -87,7 +85,7 @@ export default {
 			    }
 			})
 		},
-		// 获取资料列表
+		// 获取列表
 		async getNotifyList(type) {
 			await this.$http
 				.get(`${notifyIndex}`, {
@@ -123,7 +121,6 @@ export default {
 					this.getNotifyList();
 				});
 			}
-			// console.log('ok');
 			this.$mRouter.push({
 				route: `/pages/notice/detail?id=${item.id}`
 			});

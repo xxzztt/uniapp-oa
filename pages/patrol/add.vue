@@ -75,8 +75,6 @@ import nativeUtil from "@/utils/native-nfc-util.js"
 export default {
 	data() {
 		return {
-			// classesType: [{key: '0',value: '早班'},{key: '1',value: '晚班'}],
-			// placeState: [{key: '0',value: '正常'},{key: '1',value: '异常'}],
 			sendDate: {
 				classes_id:1,
 				state:1,
@@ -189,7 +187,6 @@ export default {
 						_this.imageList.push(r.data.url);
 					});
 			});
-			// console.log(_this.imageList);
 		},
 		// 删除已选中图片
 		close(e) {
@@ -205,11 +202,8 @@ export default {
 				});
 			}else{
 			this.btnLoading = true;
-			// this.sendDate.type = this.mtype;
 			this.sendDate.covers = JSON.stringify(this.imageList);
-			// await this.getPlace(this.sendDate.label);
 			this.sendDate.place_id = this.place.id;
-			// console.log(this.sendDate);
 			await this.$http
 				.post(`${record}`+`/create`, {
 					...this.sendDate

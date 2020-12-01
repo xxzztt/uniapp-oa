@@ -5,7 +5,6 @@
 				<view class="carrier">
 					<view class="get-wrapper">
 						<view class="title in1line">
-							<!-- {{ item.state | workStateFilter }} -->
 							<template v-for="(cates, index) in workType">
 								<template v-if="cates.key==item.cate_id">{{ cates.value }}</template>
 							</template>
@@ -69,7 +68,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

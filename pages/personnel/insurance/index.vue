@@ -12,17 +12,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in getList" :key="index" class="row" >
-				<view class="carrier">
-					<view class="get-wrapper">
-						<view class="title in1line">
-							{{ item.employees.name }}
-						</view>
-						<view class="content in2line">交纳金额:{{item.pay_amount}}元 <br>身份证号:{{item.employees.idcard}}</view>
-						<view class="time">交纳时间:{{item.pay_time}} </view>
-					</view>
-				</view>
-			</view> -->
+			
 		</view>
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/personnel/insurance/add`)">
 			<text class="cuIcon-add text-xxl"></text>
@@ -76,7 +66,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

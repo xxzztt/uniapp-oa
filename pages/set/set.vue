@@ -14,10 +14,7 @@
 			<text class="cell-more iconfont iconyou"></text>
 		</view>
 		<!-- #ifdef APP-PLUS -->
-		<!-- <view class="list-cell m-t">
-			<text class="cell-tit">消息推送</text>
-			<switch :checked="notifyChecked" :color="themeColor.color" @change="switchChange" />
-		</view> -->
+		
 		<!-- #endif -->
 		<view class="cu-list menu sm-border card-menu" v-if="styleUserIsOpen">
 			<view class="cu-item">
@@ -96,10 +93,6 @@
 <script>
 import { logout } from '@/api/login';
 import rfVersionUpgrade from '@/components/oa-version-upgrade';
-import {
-	// notifySubscriptionConfigIndex,
-	// notifySubscriptionConfigUpConfig
-} from '@/api/userInfo';
 export default {
 	components: { rfVersionUpgrade },
 	data() {
@@ -147,17 +140,9 @@ export default {
 			// 缓存大小
 			this.setList[2].content = `${uni.getStorageInfoSync().currentSize} kb`;
 			// #ifdef APP-PLUS
-			// eslint-disable-next-line
 			this.setList[5].content = `当前版本 ${plus.runtime.version}`;
-			// this.getNotifySubscriptionConfigIndex();
 			// #endif
 		},
-		// 获取消息提醒配置
-		// async getNotifySubscriptionConfigIndex() {
-		// 	await this.$http.get(notifySubscriptionConfigIndex).then(r => {
-		// 		this.notifyChecked = r.data.all;
-		// 	});
-		// },
 		// 通用跳转
 		navTo(route) {
 			if (!route) return;
@@ -199,14 +184,7 @@ export default {
 				}
 			});
 		},
-		// 监听消息推送是否打开
-		// async switchChange(e) {
-		// 	await this.$http
-		// 		.post(notifySubscriptionConfigUpConfig, { all: e.detail.value ? 1 : 0 })
-		// 		.then(() => {
-		// 			this.$mHelper.toast(`${e.detail.value ? '打开' : '关闭'}消息推送`);
-		// 		});
-		// },
+		
 		showColorModal() {
 			this.colorModal = true;
 		},

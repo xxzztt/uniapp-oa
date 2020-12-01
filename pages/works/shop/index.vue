@@ -5,7 +5,6 @@
 				<view class="carrier">
 					<view class="get-wrapper">
 						<view class="title in1line">
-							<!-- {{ item.state | workStateFilter }} -->
 							<template v-for="(cates, index) in workType">
 								<template v-if="cates.key==item.cate_id">{{ cates.value }}</template>
 							</template>
@@ -45,7 +44,8 @@
 	import oaEmpty from '@/components/oa-empty';
 	export default {
 		components: {
-			rfLoadMore,oaEmpty
+			rfLoadMore,
+			oaEmpty
 		},
 		data() {
 			return {
@@ -69,7 +69,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

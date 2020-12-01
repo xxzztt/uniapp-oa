@@ -14,19 +14,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in List" :key="index" class="row">
-				<view class="carrier">
-					<view class="repair-wrapper">
-						<view class="title in1line">
-							<template v-for="(cates, index) in diningType">
-								<template v-if="cates.key==item.type">{{ cates.value }}</template>
-							</template>
-						</view>
-						<view class="content in2line">就餐人数：{{item.num}}<br>就餐日期：{{item.date}}</view>
-						<view class="time">{{item.member.realname}} {{item.created_at|time}}</view>
-					</view>
-				</view>
-			</view> -->
+			
 		</view>
 
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/dining/add`)">
@@ -80,7 +68,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新
@@ -96,7 +83,6 @@
 			this.page++;
 			this.getDiningList();
 		},
-		// async onLoad(options) {},
 		methods: {
 
 			// 数据初始化

@@ -11,7 +11,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<oa-load-more v-if="worksList.length > 0" :status="loadingType" />
 		<oa-empty :info="'还没有内容~'" v-if="worksList.length === 0 && !loading"></oa-empty>
 		<view v-if="!hasLogin" class="works-empty">
@@ -37,7 +37,8 @@
 	import oaEmpty from '@/components/oa-empty';
 	export default {
 		components: {
-			rfLoadMore,oaEmpty
+			rfLoadMore,
+			oaEmpty
 		},
 		data() {
 			return {
@@ -59,14 +60,9 @@
 			},
 		},
 		async onShow(options) {
-			// this.cate_id = options.cate_id;
 			await this.initData();
 		},
 
-		// async onLoad(options) {
-		// 	// this.cate_id = options.cate_id;
-		// 	await this.initData();
-		// },
 		// 下拉刷新
 		onPullDownRefresh() {
 			this.page = 1;
@@ -80,11 +76,8 @@
 			this.page++;
 			this.getworksList();
 		},
-		// async onLoad(options) {
-		// 	await this.initData();
-		// },
-		methods: {
 
+		methods: {
 			// 数据初始化
 			initData() {
 				this.hasLogin = this.$mStore.getters.hasLogin;
@@ -343,32 +336,33 @@
 				}
 			}
 		}
+
 		.works-empty {
-					position: fixed;
-					left: 0;
-					top: 0;
-					width: 100%;
-					height: 100vh;
-					padding-bottom: 100upx;
-					display: flex;
-					justify-content: center;
-					flex-direction: column;
-					align-items: center;
-					background: #fff;
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100vh;
+			padding-bottom: 100upx;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			align-items: center;
+			background: #fff;
 
-					.iconfont {
-						font-size: $font-lg + 100upx;
-					}
+			.iconfont {
+				font-size: $font-lg + 100upx;
+			}
 
-					.empty-tips {
-						display: flex;
-						font-size: $font-sm + 2upx;
-						color: $font-color-disabled;
+			.empty-tips {
+				display: flex;
+				font-size: $font-sm + 2upx;
+				color: $font-color-disabled;
 
-						.navigator {
-							margin-left: 16upx;
-						}
-					}
+				.navigator {
+					margin-left: 16upx;
 				}
+			}
+		}
 	}
 </style>

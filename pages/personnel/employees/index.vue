@@ -12,17 +12,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-		<!-- 	<view v-for="(item, index) in getList" :key="index" class="row" @tap="navTo(`/pages/manage/archives/detail?id=${item.id}`)">
-				<view class="carrier">
-					<view class="get-wrapper">
-						<view class="title in1line">
-							{{ item.name }}(<template v-if="item.gender==1">男</template><template v-if="item.gender==0">保密</template><template v-if="item.gender==2">女</template>)
-						</view>
-						<view class="content in2line">工号:{{item.serial}} 年龄:{{item.age}} 学历:{{item.education}}<br>籍贯:{{item.native}} 政治面貌:<template v-if="item.political==0">中共党员</template><template v-if="item.political==1">共青团员</template><template v-if="item.political==2">群众</template><template v-if="item.political==3">其他</template></view>
-						<view class="time">身份证:{{item.idcard}} 手机:{{item.mobile}}</view>
-					</view>
-				</view>
-			</view> -->
+		
 		</view>
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/personnel/employees/add`)">
 			<text class="cuIcon-add text-xxl"></text>
@@ -74,7 +64,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

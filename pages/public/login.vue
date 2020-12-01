@@ -6,7 +6,6 @@
 				<text class="back-btn iconfont iconzuo" @tap="navBack"></text>
 				<!--插画-->
 				<view class="right-top-sign"></view>
-				<!-- 设置白色背景防止软键盘把下部绝对定位元素顶上来盖住输入框等 -->
 				<view class="wrapper">
 					<view class="left-top-sign">LOGIN</view>
 					<view class="welcome">
@@ -70,12 +69,7 @@
 							登录
 						</button>
 					</view>
-					<!-- <view @tap="showLoginBySmsCode" class="forget-section">
-						{{ loginByPass ? '验证码登录' : '密码登录' }}
-					</view> -->
-					<!-- <view class="forget-section" @tap="navTo('/pages/public/password')">
-						忘记密码?
-					</view> -->
+					
 				</view>
 				<view class="register-section">
 					<text @tap="navTo('/pages/public/password')">找回密码</text>
@@ -492,16 +486,14 @@ export default {
 					}
 					uni.removeStorageSync('oauthClient');
 					uni.removeStorageSync('wechatUserInfo');
-					this.$mWebsocket.initWebsocket();
+					// this.$mWebsocket.initWebsocket();
 					const backToPage = uni.getStorageSync('backToPage');
 					uni.removeStorageSync('backToPage');
 					if (backToPage) {
 						if (
 							backToPage.indexOf('/pages/profile/profile') !== -1 ||
-							backToPage.indexOf('/pages/cart/cart') !== -1 ||
 							backToPage.indexOf('/pages/index/index') !== -1 ||
-							backToPage.indexOf('/pages/notify/notify') !== -1 ||
-							backToPage.indexOf('/pages/category/category') !== -1
+							backToPage.indexOf('/pages/notify/notify') !== -1 
 						) {
 							this.$mRouter.reLaunch(JSON.parse(backToPage));
 						} else {

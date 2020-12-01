@@ -187,10 +187,8 @@
 		async onShow() {
 			// 初始化数据
 			await this.initData();
-			// console.log(this.user);
 		},
 		onLoad() {
-			// this.initData();
 			// #ifdef APP-PLUS
 			if (uni.getSystemInfoSync().platform === 'ios') {
 				this.CustomBar = 0;
@@ -207,7 +205,6 @@
 		},
 		// #endif
 		methods: {
-			// ...mapMutations(['setNotifyNum']),
 			handleTip(isNewVersion) {
 				this.isNewVersion = isNewVersion;
 			},
@@ -218,13 +215,10 @@
 			// 数据初始化
 			async initData() {
 				this.user = uni.getStorageSync('user');
-				// console.log(this.user);
 				// 缓存大小
 				this.setList[2].content = `${uni.getStorageInfoSync().currentSize} kb`;
 				// #ifdef APP-PLUS
-				// eslint-disable-next-line
 				this.setList[5].content = `当前版本 ${plus.runtime.version}`;
-				// this.getNotifySubscriptionConfigIndex();
 				// #endif
 				this.hasLogin = this.$mStore.getters.hasLogin;
 				uni.setTabBarStyle({
@@ -246,11 +240,9 @@
 					});
 				});
 				if (this.hasLogin) {
-					// console.log(this.hasLogin);
 					await this.getMemberInfo();
 				} else {
 					this.loading = false;
-					// this.resetSectionData();
 				}
 			},
 			// 退出登录
@@ -300,21 +292,14 @@
 				await this.$http
 					.get(memberInfo)
 					.then(async r => {
-						// console.log(r.data);
 						this.loading = false;
 						this.userInfo = r.data;
-						// console.log(this.userInfo);
-						// await this.setSectionData(r.data);
-						// this.user_level = r.data.role.title;
-						// this.merchant = r.data.merchant;
-						// this.department = r.data.department;
 						// 更新userInfo缓存
 						uni.setStorageSync('userInfo', r.data);
 					})
 					.catch(() => {
 						this.hasLogin = false;
 						this.userInfo = {};
-						// this.resetSectionData();
 						this.loading = false;
 					});
 			},
@@ -362,13 +347,7 @@
 					});
 				}
 			},
-			/**
-			 *  会员卡下拉和回弹
-			 *  1.关闭bounce避免ios端下拉冲突
-			 *  2.由于touchmove事件的缺陷（以前做小程序就遇到，比如20跳到40，h5反而好很多），下拉的时候会有掉帧的感觉
-			 *    transition设置0.1秒延迟，让css来过渡这段空窗期
-			 *  3.回弹效果可修改曲线值来调整效果，推荐一个好用的bezier生成工具 http://cubic-bezier.com/
-			 */
+			
 			coverTouchstart(e) {
 				if (pageAtTop === false) {
 					return;

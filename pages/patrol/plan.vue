@@ -36,7 +36,6 @@
 		record,
 		patrolPlan,
 		planState,
-		// getCarType
 	} from '@/api/basic';
 	import uniCalendar from '@/components/oa-calendar/oa-calendar.vue'
 	import rfLoadMore from '@/components/oa-load-more/oa-load-more';
@@ -78,12 +77,10 @@
 		onShow() {
 			this.initData();
 		},
-		// async onLoad(options) {this.initData();},
 		// 下拉刷新
 		onPullDownRefresh() {
 			this.page = 1;
 			this.getList = [];
-			// this.recordList = [];
 			this.loading = true;
 			this.getPlanList('refresh',this.selectdate);
 		},
@@ -97,15 +94,11 @@
 			change(e) {
 				if(e.type!==0) this.selectdate = e.fulldate;else this.selectdate='9999';
 				this.getPlanList('refresh',this.selectdate);
-				// console.log(this.selectdate);
 			},
 			// 数据初始化
 			initData() {
-				// console.log( moment().startOf('day').format('YYYY-MM-DD'));
-				// this.selected=[{date:"2020-09-15","info": "未巡更"},{date:"2020-09-17","info": "已巡更"}];
 				this.hasLogin = this.$mStore.getters.hasLogin;
 				this.page = 1;
-				// this.recordList.length = 0;
 				this.getList.length = 0;
 				this.planList.length = 0;
 				this.getRecordList();
@@ -126,10 +119,8 @@
 			// 获取计划列表
 			async getPlanList(type,date) {
 				this.getList = [];
-				// this.recordList = [];
 				if (date) this.today = date;
 				else this.today = '9999';
-				// console.log(this.today);
 				await this.$http
 					.get(`${patrolPlan}`, {
 						page: this.page,
@@ -143,22 +134,14 @@
 						}
 						this.loadingType = r.data.length === 10 ? 'more' : 'nomore';
 						this.getList = [...this.getList, ...r.data];
-						//所有计划
 						for (let i = 0, m = 0; i < this.getList.length; i++) {
-							// 字符串转化为数组
 							let planList = {};
 							let check = this.getList[i].check_date.split(",");
-
-							// console.log(check);
-							// check = [...new Set(check)];
 							for (let j = 0; j < check.length; j++, m++) {
-								//判断是否打卡
 								var planstate = 0,placestate=2,mark='';
 								for (let p = 0; p < this.recordList.length; p++) {
 									var created_at = this.recordList[p].created_at;
 									var fulldate = moment(created_at * 1000).startOf('day').format('YYYY-MM-DD');
-									// console.log( moment(created_at * 1000).startOf('day').format('YYYY-MM-DD'));
-									// console.log(check[j]);
 									if (fulldate === check[j] && this.recordList[p].member_id === this.getList[i].member_id && this.recordList[p].classes_id === this.getList[
 											i].classes_id && this.recordList[p].place_id === this.getList[i].place_id) {
 										planstate = 1;placestate=this.recordList[p].state;mark=this.recordList[p].mark;
@@ -180,7 +163,6 @@
 									"place": this.getList[i].place,
 									"member": this.getList[i].member
 								};
-								//判断去重，只保留当天的计划
 								if(this.today!=='9999'){
 									if (this.today) this.selectdate = this.today;
 									else this.selectdate = this.startTime;
@@ -189,23 +171,17 @@
 								}
 								else
 								this.planList.push(planList);
-								// console.log(m);
 							}
 						}
-						// console.log(this.planList);
 						for (let i = 0; i < this.getList.length; i++) {
 							this.shijian.push(this.getList[i].check_date);
 						}
-						// 转化为字符串
 						this.shijian = this.shijian.toString();
-						// 字符串转化为数组
 						this.shijian = this.shijian.split(",");
-						// 去重时间数组
 						var arr = [...new Set(this.shijian)];
 						this.shijian = arr.sort((a, b) => {
 							return a > b
 						});
-						// 动态赋值给selected;
 						for (let j = 0; j < this.shijian.length; j++) {
 							this.selected.push({
 								date: this.shijian[j],
@@ -228,7 +204,6 @@
 					})
 					.then(r => {
 						this.recordList = r.data;
-						// console.log(this.recordList);
 					})
 			},
 			//获取状态

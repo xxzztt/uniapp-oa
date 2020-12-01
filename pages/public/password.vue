@@ -5,7 +5,6 @@
 				<!--顶部返回按钮-->
 				<text class="back-btn iconfont iconzuo" @tap="navBack"></text>
 				<view class="right-top-sign"></view>
-				<!-- 设置白色背景防止软键盘把下部绝对定位元素顶上来盖住输入框等 -->
 				<view class="wrapper">
 					<view class="left-top-sign">{{ type == 1 ? 'UPDATE' : 'GET BACK' }}</view>
 					<view class="welcome"> {{ type == 1 ? '修改密码' : '找回密码' }}！ </view>

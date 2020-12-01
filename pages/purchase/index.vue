@@ -14,19 +14,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in List" :key="index" class="row">
-				<view class="carrier">
-					<view class="purchase-wrapper">
-						<view class="title in1line">
-							<template v-for="(cates, index) in purchaseType">
-								<template v-if="cates.key==item.type">{{ cates.value }}</template>
-							</template>
-						</view>
-						<view class="content in2line">金额：¥{{item.amount}}<br>采购日期：{{item.date}} {{item.mark}}</view>
-						<view class="time">{{item.member.realname}} {{item.created_at|time}}</view>
-					</view>
-				</view>
-			</view> -->
+			
 		</view>
 
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/purchase/add`)">
@@ -83,7 +71,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新
@@ -99,7 +86,6 @@
 			this.page++;
 			this.getpurchaseList();
 		},
-		// async onLoad(options) {},
 		methods: {
 
 			// 数据初始化

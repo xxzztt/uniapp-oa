@@ -80,7 +80,6 @@
 		methods: {
 			bindTypeChange(e) {
 				this.index = e.detail.value;
-				// console.log(this.employees[this.index].key);
 			},
 			handleTypeChange(e) {
 				this.sendDate.type = e.detail.value;
@@ -117,7 +116,6 @@
 						this.sendDate = r.data;
 						this.sendDate.type = r.data.type;
 						this.index = this.getArrayIndex(this.employees,r.data.employees_id);
-						// console.log(this.index);
 						uni.setNavigationBarTitle({
 							title: r.data.title
 						});

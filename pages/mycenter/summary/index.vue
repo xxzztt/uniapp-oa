@@ -16,21 +16,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in getList" :key="index" class="row" @tap="navTo(`/pages/mycenter/summary/detail?id=${item.id}`)">
-				<view class="carrier">
-					<view class="get-wrapper">
-						<view class="title in1line">
-							<template v-for="(cates, index) in logType">
-								<template v-if="cates.key==item.type">{{ cates.value }}</template>
-							</template>
-							-
-							{{item.title}}
-						</view>
-						<view class="content in2line"><oa-parser lazy-load :html="item.content"></oa-parser></view>
-						<view class="time">{{item.member.realname}} {{item.created_at | time}}</view>
-					</view>
-				</view>
-			</view> -->
+		
 		</view>
 
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/mycenter/summary/add`)">

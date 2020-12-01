@@ -1,9 +1,6 @@
 <template>
 	<view class="page">
-		<!-- <view class="input-t" @tap.stop="chooseType">
-			<text>类型</text>
-			<text class="input-quick">{{ type || '请选择日程类型' }} <text class="iconfont iconxia"></text></text>
-		</view> -->
+		
 		<view class="input-t ">
 			<text>类型</text>
 			<view class="tit">
@@ -130,18 +127,6 @@ export default {
 					this.type = r.data;
 				})
 		},
-		// chooseType() {
-		// 	uni.showActionSheet({
-		// 		itemList: this.worksType,
-		// 		success: res => {
-		// 			this.type = this.worksType[res.tapIndex];
-		// 			this.typeValue = res.tapIndex;
-		// 		},
-		// 		fail: res => {
-		// 			console.log(res);
-		// 		}
-		// 	});
-		// },
 		// 获取详情
 		async getDetail(id) {
 			await this.$http
@@ -152,7 +137,6 @@ export default {
 					this.typeindex = r.data.type;
 					this.begin_date = r.data.begin_date;
 					this.end_date = r.data.end_date;
-					// console.log(this.sendDate);
 					this.imageList = JSON.parse(r.data.covers);
 					uni.setNavigationBarTitle({
 						title: r.data.title
@@ -168,7 +152,6 @@ export default {
 			this.sendDate.type = this.typeindex;
 			this.sendDate.begin_date = this.begin_date;
 			this.sendDate.end_date = this.end_date;
-			// console.log(this.sendDate);
 			await this.$http
 					.put(`${calendar}/update?id=${this.id}`, {
 					...this.sendDate

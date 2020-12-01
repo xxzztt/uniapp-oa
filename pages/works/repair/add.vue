@@ -2,9 +2,7 @@
 	<view class="page">
 		<view class="input-t" @tap.stop="chooseType">
 			<text>报修类型</text>
-			<text class="input-quick"
-			>{{ mtype || '请选择报修类型' }} <text class="iconfont iconxia"></text
-			></text>
+			<text class="input-quick">{{ mtype || '请选择报修类型' }} <text class="iconfont iconxia"></text></text>
 		</view>
 
 		<view class="input-t">
@@ -12,12 +10,8 @@
 			<text class="input-quick"></text>
 		</view>
 		<view class="input-body">
-			<textarea
-				placeholder="请详细描述您要报修的内容..."
-				v-model="sendDate.content"
-				class="input-textare"
-			/>
-		</view>
+			<textarea placeholder="请详细描述您要报修的内容..." v-model="sendDate.content" class="input-textare" />
+			</view>
 		<view class="input-t">
 			<text>提醒方式</text>
 		</view>
@@ -108,7 +102,6 @@ export default {
 				success: res => {
 					this.mtype = this.worksType[res.tapIndex];
 					this.mtypeValue = res.tapIndex;
-					// console.log(this.mtypeValue);
 				},
 				fail: res => {
 					console.log(res);
@@ -118,10 +111,8 @@ export default {
 		// 发送数据
 		async send() {
 			this.btnLoading = true;
-			// this.sendDate.type = this.mtype;
 			this.sendDate.cate_id = this.mtypeValue;
 			this.sendDate.status = 'repair/apply';
-			// console.log(this.sendDate);
 			await this.$http
 				.post(`${repair}`+`/create`, {
 					...this.sendDate

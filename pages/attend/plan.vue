@@ -81,9 +81,6 @@
 		onShow() {
 			this.initData();
 		},
-		// async onLoad(options) {
-		// 	this.initData();
-		// },
 		// 下拉刷新
 		onPullDownRefresh() {
 			this.page = 1;
@@ -105,7 +102,6 @@
 				if (e.type !== 0) this.selectdate = e.fulldate;
 				else this.selectdate = '9999';
 				this.getRecordList('refresh', this.selectdate);
-				// console.log(this.selectdate);
 			},
 			// 数据初始化
 			initData() {
@@ -113,7 +109,6 @@
 				this.page = 1;
 				this.recordList.length = 0;
 				this.getList.length = 0;
-				// this.planList.length = 0;
 				this.getCheckState();
 				this.getPlanList();
 				this.getRecordList('', this.selectdate);
@@ -142,25 +137,18 @@
 						}
 						this.loadingType = r.data.length === 10 ? 'more' : 'nomore';
 						this.getList = [...this.getList, ...r.data];
-						//所有计划
 						for (let i = 0, m = 0; i < this.getList.length; i++) {
-							// 字符串转化为数组
 							let check = this.getList[i].check_date.split(",");
-
 						}
 						for (let i = 0; i < this.getList.length; i++) {
 							this.shijian.push(this.getList[i].check_date);
 						}
-						// 转化为字符串
 						this.shijian = this.shijian.toString();
-						// 字符串转化为数组
 						this.shijian = this.shijian.split(",");
-						// 去重时间数组
 						var arr = [...new Set(this.shijian)];
 						this.shijian = arr.sort((a, b) => {
 							return a > b
 						});
-						// 动态赋值给selected;
 						for (let j = 0; j < this.shijian.length; j++) {
 							this.selected.push({
 								date: this.shijian[j],
@@ -191,7 +179,6 @@
 							uni.stopPullDownRefresh();
 						}
 						this.recordList = r.data;
-						// console.log(this.recordList);
 					})
 					.catch(() => {
 						this.loading = false;

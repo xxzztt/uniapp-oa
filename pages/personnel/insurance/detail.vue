@@ -106,7 +106,6 @@
 						this.sendDate.type = r.data.type;
 						this.pay_time = r.data.pay_time;
 						this.index = this.getArrayIndex(this.employees,r.data.employees_id);
-						// console.log(this.index);
 						uni.setNavigationBarTitle({
 							title: r.data.title
 						});

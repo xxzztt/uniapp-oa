@@ -90,7 +90,6 @@ export default {
 			await this.$http
 				.get(`${carApply}`+'/view?id='+`${id}`)
 				.then(r => {
-					// console.log(r.data);
 					this.loading = false;
 					this.getDetail = r.data.model;
 					this.approveDetail = r.data.model.log;
@@ -124,10 +123,6 @@ export default {
 					this.workType = r.data;
 				})
 				.catch(() => {
-					// this.loading = false;
-					// if (mtype === 'refresh') {
-					// 	uni.stopPullDownRefresh();
-					// }
 				});
 		},
 	}

@@ -103,7 +103,7 @@ export default {
 		handleRemindTypeChange(e) {
 			this.sendDate.remind = e.detail.value;
 		},
-// 监听日期更改
+		// 监听日期更改
 			bindDateChange(e) {
 				this.begin_date = e.target.value;
 			},

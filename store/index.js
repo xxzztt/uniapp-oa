@@ -12,9 +12,9 @@ const NOTIFYNUM = uni.getStorageSync('notifyNum') || 0;
 const IMHISTORY = uni.getStorageSync('imHistory') || [];
 const IMNOREAD = uni.getStorageSync('imNoRead') || 0;
 const THEMECOLOR = uni.getStorageSync('themeColor') || {
-	title: '官方',
-	name: 'rf',
-	color: '#fa436a'
+	title: '天青',
+	name: 'cyan',
+	color: '#1cbbb4'
 };
 const store = new Vuex.Store({
 	state: {

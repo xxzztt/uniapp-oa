@@ -14,19 +14,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in getList" :key="index" class="row" >
-				<view class="carrier">
-					<view class="get-wrapper">
-						<view class="title in1line">
-							[<template v-for="(cates, index) in rewardsType">
-								<template v-if="cates.key==item.type">{{ cates.value }}</template>
-							</template>]{{ item.employees.name }}
-						</view>
-						<view class="content in2line">{{item.mark}}</view>
-						<view class="time">时间:{{item.created_at|time}}</view>
-					</view>
-				</view>
-			</view> -->
+		
 		</view>
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/personnel/rewards/add`)">
 			<text class="cuIcon-add text-xxl"></text>
@@ -79,7 +67,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

@@ -15,20 +15,7 @@
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in getList" :key="index" class="row" >
-				<view class="carrier">
-					<view class="get-wrapper">
-						<view class="title in1line">
-							<template v-for="(cates, index) in assetType">
-								<template v-if="cates.key==item.cate_id">{{ cates.value }}</template>
-							</template>
-							-{{ item.title }}
-						</view>
-						<view class="content in2line">负责人:{{item.person}}<br>使用部门:{{item.department||'未指定'}} 使用地点:{{item.address||'未指定'}}</view>
-						<view class="time">编号:{{item.serial}} 数量:{{item.num}}{{item.unit}} </view>
-					</view>
-				</view>
-			</view> -->
+		
 		</view>
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/personnel/asset/add`)">
 			<text class="cuIcon-add text-xxl"></text>
@@ -81,7 +68,6 @@
 		},
 		onShow() {
 			this.initData();
-			// console.log(this.workState);
 		},
 
 		// 下拉刷新

@@ -11,10 +11,6 @@
 				</view>
 			</view>
 		</view>
-
-	<!-- 	<view class="product-list-wrapper">
-				<oa-product-list :bottom="0" :list="studyList" :isList="isList" :style="{paddingTop: dropScreenH+20 + 'upx' }"></oa-product-list>
-		</view> -->
 		<oa-load-more v-if="studyList.length > 0" :status="loadingType" />
 		<oa-empty
 			:info="'还没有内容~'"
@@ -62,9 +58,6 @@ export default {
 			return moment(val * 1000).format('YYYY-MM-DD HH:mm');
 		},
 	},
-	// onShow() {
-	// 	this.initData();
-	// },
 
 	// 下拉刷新
 	onPullDownRefresh() {

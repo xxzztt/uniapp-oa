@@ -1,9 +1,5 @@
 <template>
 	<view class="page">
-		<!-- <view class="input-t" @tap.stop="chooseType">
-			<text>日志类型</text>
-			<text class="input-quick">{{ mtype || '请选择日志类型' }} <text class="iconfont iconxia"></text></text>
-		</view> -->
 		<view class="input-t ">
 			<text>类型</text>
 			<view class="tit">
@@ -42,8 +38,6 @@ import moment from '@/common/moment';
 export default {
 	data() {
 		return {
-			// mtype:'',
-			// mtypeValue:'',
 			type: [],
 			typeindex: 0,
 			sendDate: {},
@@ -77,18 +71,7 @@ export default {
 					this.type = r.data;
 				})
 		},
-		// chooseType() {
-		// 	uni.showActionSheet({
-		// 		itemList: this.worksType,
-		// 		success: res => {
-		// 			this.mtype = this.worksType[res.tapIndex];
-		// 			this.mtypeValue = res.tapIndex;
-		// 		},
-		// 		fail: res => {
-		// 			console.log(res);
-		// 		}
-		// 	});
-		// },
+		
 		// 获取详情
 		async getDetail(id) {
 			await this.$http

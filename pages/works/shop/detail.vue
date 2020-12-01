@@ -13,7 +13,7 @@
 			</template>
 		</view>
 		<view class="input-title ">
-			<text >数量</text>
+			<text>数量</text>
 			{{getDetail.num}}
 		</view>
 		<view class="input-title">
@@ -135,7 +135,6 @@ page {
 			padding: $spacing-lg;
 			background-color: $color-white;
 		}
-/*问题反馈*/
 .input-title {
 	display: flex;
 	flex-direction: row;

@@ -1,16 +1,5 @@
 <template>
 	<view class="visit">
-		<!-- <view class="notify-list">
-			<view v-for="(item, index) in studyList" :key="index" class="row" @tap="navTo(`/pages/works/visit/detail?id=${item.id}`)">
-				<view class="carrier">
-					<view class="notify-wrapper">
-						<view class="title in1line">{{item.title||item.name}}</view>
-						<view class="content in2line">{{item.content}}</view>
-						<view class="time">{{item.realname}} {{item.created_at | time}} </view>
-					</view>
-				</view>
-			</view>
-		</view> -->
 		<view class="uni-list">
 			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item, index) in studyList" :key="index" @tap="navTo(`/pages/study/detail?id=${item.id}`)">
 				<view class="uni-media-list">
@@ -84,9 +73,7 @@
 			this.page++;
 			this.getstudyList();
 		},
-		// async onLoad(options) {
-		// 	this.title = options.title;
-		// },
+		
 		methods: {
 
 			// 数据初始化

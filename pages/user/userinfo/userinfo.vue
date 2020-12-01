@@ -176,16 +176,8 @@
 			async initData() {
 				this.token = uni.getStorageSync('accessToken') || undefined;
 				this.getMemberInfo();
-				// this.getAddressDetail();
-				// this.getAddressDetail(profileInfo.id);
-				// 获取收货地址
-				// this.addressData.address_name = '请选择机构';
-				// this.addressData.province_id = this.profileInfo.province_id;
-				// this.addressData.city_id= this.profileInfo.city_id;
-				// this.addressData.area_id= this.profileInfo.area_id;
+				
 			},
-			// 获取收货地址
-			// async getAddressDetail() {
 
 			// },
 			// 获取用户信息
@@ -196,7 +188,6 @@
 						this.loading = false;
 						this.profileInfo = r.data;
 						this.date = this.profileInfo.birthday;
-						// console.log(this.profileInfo);
 
 					})
 					.catch(() => {

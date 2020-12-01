@@ -132,12 +132,10 @@ export default {
 		// 发送数据
 		async send() {
 			this.btnLoading = true;
-			// this.sendDate.type = this.mtype;
 			this.sendDate.car_id = this.car_id;
 			this.sendDate.status = 'car/apply';
 			this.sendDate.begin_date = this.begin_date;
 			this.sendDate.end_date = this.end_date;
-			// console.log(this.sendDate);
 			await this.$http
 				.post(`${carApply}`+`/create`, {
 					...this.sendDate
@@ -147,7 +145,6 @@ export default {
 					this.$mRouter.push({
 						route: `/pages/works/car/index`
 					});
-					// this.$mRouter.back();
 				})
 				.catch(() => {
 					this.btnLoading = false;

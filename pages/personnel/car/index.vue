@@ -15,20 +15,7 @@
 						</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
-			<!-- <view v-for="(item, index) in getList" :key="index" class="row">
-				<view class="carrier">
-					<view class="get-wrapper">
-						<view class="title in1line">
-							{{ item.title }}
-							-<template v-for="(cates, index) in carState">
-								<template v-if="cates.key==item.state">{{ cates.value }}</template>
-							</template>
-						</view>
-						<view class="content in2line">{{item.title}} 里程:{{item.mileage}}KM<br>保险:{{item.insurance}} 年检:{{item.inspection}}</view>
-						<view class="time">车牌:{{item.plate_number}} 行驶证:{{item.vehicle_license}}</view>
-					</view>
-				</view>
-			</view> -->
+		
 		</view>
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/personnel/car/add`)">
 			<text class="cuIcon-add text-xxl"></text>
@@ -174,7 +161,6 @@
 							if (res.confirm) {
 								this.deleteItem(id);
 							} else if (res.cancel) {
-								// console.log('用户点击取消');
 							}
 						}
 					});
