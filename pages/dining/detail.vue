@@ -3,8 +3,8 @@
 		<view class="cu-form-group">
 			<view >就餐类型</view>
 				<radio-group  @change="handleTypeChange">
-					<label class="radio margin-right" v-for="(item, index) in diningType" :key="index"><radio :value="item.key"
-						:checked="item.key === type" :color="themeColor.color"  style="transform: scale(0.75);"/>{{ item.value }}</label>
+					<label class="radio margin-right" v-for="(item, index) in diningType" :key="index">
+						<radio :value="item.key" :checked="item.key === sendDate.type" :color="themeColor.color"  style="transform: scale(0.75);"/>{{ item.value }}</label>
 				</radio-group>
 		</view>
 		<view class="input-t ">

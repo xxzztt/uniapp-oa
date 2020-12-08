@@ -271,9 +271,9 @@ export default {
 	data() {
 		return {
 			loginParams: {
-				mobile: '',
+				mobile: '18986869999',
 				code: '',
-				password: ''
+				password: '18986860001'
 			},
 			registerParams: {
 				mobile: '',
@@ -324,8 +324,8 @@ export default {
 			uni.removeStorageSync('loginSmsCodeTime');
 		}
 		this.registerParams.promoCode = options.promo_code;
-		this.loginParams.mobile = uni.getStorageSync('loginMobile') || '';
-		this.loginParams.password = uni.getStorageSync('loginPassword') || '';
+		// this.loginParams.mobile = uni.getStorageSync('loginMobile') || '';
+		// this.loginParams.password = uni.getStorageSync('loginPassword') || '';
 		this.userInfo = uni.getStorageSync('wechatUserInfo');
 		const backUrl = uni.getStorageSync('backToPage');
 		if (backUrl.indexOf('promo_code') !== -1) {
