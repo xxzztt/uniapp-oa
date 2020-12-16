@@ -167,94 +167,7 @@
 							登录
 						</button>
 					</block>
-					<block v-if="tabCurrentIndex === 1">
-						<view class="login-type-form">
-							<view class="input-item">
-								<text class="iconfont icondianhua" :class="'text-' + themeColor.name"></text>
-								<input
-									class="login-type-input"
-									type="number"
-									name="mobile"
-									v-model="registerParams.mobile"
-									placeholder="请输入手机号码"
-									maxlength="11"
-								/>
-							</view>
-							<view class="input-item input-item-sms-code">
-								<text class="iconfont iconyanzhengma" :class="'text-' + themeColor.name"></text>
-								<view class="input-wrapper">
-									<view class="oa-input-wrapper">
-										<input
-											type="number"
-											class="login-type-input"
-											v-model="registerParams.code"
-											placeholder="请输入验证码"
-											maxlength="4"
-										/>
-									</view>
-									<button
-										class="sms-code-btn"
-										:disabled="smsCodeBtnDisabled"
-										@tap.stop="getSmsCode('register', registerParams.mobile)"
-									>
-										<text v-if="!smsCodeBtnDisabled">获取验证码</text>
-										<text v-else class="sms-code-resend">{{
-											`重新发送 (${codeSeconds})`
-											}}</text>
-									</button>
-								</view>
-							</view>
-							<view class="input-item">
-								<text class="iconfont iconmimaffffffpx" :class="'text-' + themeColor.name"></text>
-								<input
-									class="login-type-input"
-									type="password"
-									v-model="registerParams.password"
-									placeholder="请输入密码"
-									maxlength="20"
-								/>
-							</view>
-							<view class="input-item">
-								<text class="iconfont iconmimaffffffpx" :class="'text-' + themeColor.name"></text>
-								<input
-									class="login-type-input"
-									type="password"
-									v-model="registerParams.password_repetition"
-									placeholder="请输入确认密码"
-									maxlength="20"
-								/>
-							</view>
-							<view class="input-item">
-								<text class="iconfont iconwode" :class="'text-' + themeColor.name"></text>
-								<input
-									class="login-type-input"
-									type="text"
-									v-model="registerParams.nickname"
-									placeholder="请输入昵称"
-									maxlength="20"
-								/>
-							</view>
-							<view class="input-item" v-if="!closeRegisterPromoCode">
-								<text class="iconfont iconyanzhengma1" :class="'text-' + themeColor.name"></text>
-								<input
-									class="login-type-input"
-									type="text"
-									v-model="registerParams.promoCode"
-									placeholder="请输入邀请码"
-									maxlength="20"
-								/>
-							</view>
-						</view>
-						<button
-							class="confirm-btn"
-							:class="'bg-' + themeColor.name"
-							:disabled="btnLoading"
-							:loading="btnLoading"
-							@tap="toRegister"
-						>
-							注册
-						</button>
-					</block>
+					
 				</view>
 			</view>
 			<view class="login-type-bottom" :class="'text-' + themeColor.name">
@@ -271,9 +184,9 @@ export default {
 	data() {
 		return {
 			loginParams: {
-				mobile: '18986869999',
+				mobile: '',
 				code: '',
-				password: '18986860001'
+				password: ''
 			},
 			registerParams: {
 				mobile: '',
@@ -323,16 +236,9 @@ export default {
 			this.smsCodeBtnDisabled = false;
 			uni.removeStorageSync('loginSmsCodeTime');
 		}
-		this.registerParams.promoCode = options.promo_code;
-		// this.loginParams.mobile = uni.getStorageSync('loginMobile') || '';
-		// this.loginParams.password = uni.getStorageSync('loginPassword') || '';
 		this.userInfo = uni.getStorageSync('wechatUserInfo');
 		const backUrl = uni.getStorageSync('backToPage');
-		if (backUrl.indexOf('promo_code') !== -1) {
-			this.registerParams.promoCode = JSON.parse(backUrl)['query']['promo_code'];
-		} else {
-			this.registerParams.promoCode = options.promo_code;
-		}
+		
 	},
 	methods: {
 		loginTest(mobile, password) {
@@ -511,50 +417,7 @@ export default {
 		tabClick(index) {
 			this.tabCurrentIndex = index;
 		},
-		// 注册账号
-		async toRegister() {
-			if (this.$mSettingConfig.closeRegister) {
-				this.$mHelper.toast('暂未开放注册，敬请期待～');
-				return;
-			}
-			this.reqBody['mobile'] = this.registerParams['mobile'];
-			this.reqBody['password'] = this.registerParams['password'];
-			this.reqBody['code'] = this.registerParams['code'];
-			this.reqBody['nickname'] = this.registerParams['nickname'];
-			const cheRes = this.$mGraceChecker.check(
-				this.reqBody,
-				this.$mFormRule.registerRule
-			);
-			if (!cheRes) {
-				this.$mHelper.toast(this.$mGraceChecker.error);
-				return;
-			}
-			if (
-				this.registerParams['password'] !==
-				this.registerParams['password_repetition']
-			) {
-				this.$mHelper.toast('两次输入的密码不一致');
-				return;
-			}
-			this.reqBody['password_repetition'] = this.registerParams[
-				'password_repetition'
-				];
-			this.reqBody['promo_code'] = this.registerParams['promoCode'];
-			this.btnLoading = true;
-			this.reqBody.group = this.$mHelper.platformGroupFilter();
-			await this.$http
-				.post(registerByPass, this.reqBody)
-				.then(() => {
-					this.btnLoading = false;
-					this.$mHelper.toast('恭喜您注册成功');
-					uni.setStorageSync('loginMobile', this.reqBody['mobile']);
-					uni.setStorageSync('loginPassword', this.reqBody['password']);
-					this.$mRouter.push({ route: '/pages/public/login' });
-				})
-				.catch(() => {
-					this.btnLoading = false;
-				});
-		}
+		
 	}
 };
 </script>
