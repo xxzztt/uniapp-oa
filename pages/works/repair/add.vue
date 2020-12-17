@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import { uploadImage } from '@/api/userInfo';
-import { repair,repairMsg,repairType } from '@/api/basic';
 export default {
 	data() {
 		return {
@@ -60,7 +58,7 @@ export default {
 				remind:'0',
 				content: ''
 			},
-			worksType:[],
+			worksType:["资产报修","日常报修","车辆报修","工程报修"],
 			btnLoading: false
 		};
 	},
@@ -74,27 +72,11 @@ export default {
 		    }
 		})
 	},
-	async onLoad(options) {
-		await this.getworksType();
-	},
+	
 	methods: {
 		// 监听反馈类型事件
 		handleRemindTypeChange(e) {
 			this.sendDate.remind = e.detail.value;
-		},
-
-		async getworksType() {
-			await this.$http
-				.get(`${repairType}`, {})
-				.then(r => {
-					this.worksType = r.data;
-				})
-				.catch(() => {
-					this.loading = false;
-					if (mtype === 'refresh') {
-						uni.stopPullDownRefresh();
-					}
-				});
 		},
 		chooseType() {
 			uni.showActionSheet({
@@ -110,20 +92,7 @@ export default {
 		},
 		// 发送数据
 		async send() {
-			this.btnLoading = true;
-			this.sendDate.cate_id = this.mtypeValue;
-			this.sendDate.status = 'repair/apply';
-			await this.$http
-				.post(`${repair}`+`/create`, {
-					...this.sendDate
-				})
-				.then(() => {
-					this.btnLoading = false;
-					this.$mRouter.back();
-				})
-				.catch(() => {
-					this.btnLoading = false;
-				});
+			this.$mHelper.toast('提交成功');
 		}
 	}
 };

@@ -1,28 +1,14 @@
 <template>
-	<view class="helper-detail" v-if="!loading">
-		<view v-if="helperDetail.title" class="detail">
-			<oa-parser lazy-load :html="helperDetail.content || ''"></oa-parser>
-		</view>
-		<oa-empty :info="`暂无帮助内容`" v-if="!helperDetail.title && !loading"></oa-empty>
-		<!--加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
+	<view class="helper-detail">
+		
+		<oa-empty :info="`暂无帮助内容`"></oa-empty>
 	</view>
 </template>
 
 <script>
-import { helperView } from '@/api/basic';
-import oaParser from '@/components/oa-parser';
+import oaEmpty from '@/components/oa-empty';
 export default {
-	components: {
-		oaParser,
-	},
-	data() {
-		return {
-			loading: true,
-			helperDetail: {},
-			helperId: ''
-		};
-	},
+	components: { oaEmpty},
 	onShow() {
 		uni.setNavigationBarColor({
 		    frontColor: '#ffffff',
@@ -33,27 +19,7 @@ export default {
 		    }
 		})
 	},
-	onLoad(option) {
-		this.helperId = option.id;
-		this.initData();
-	},
-	methods: {
-		// 数据初始化
-		initData() {
-			this.getHelperDetail();
-		},
-		async getHelperDetail() {
-			await this.$http.get(helperView, {
-				id: this.helperId
-			}).then(r => {
-				this.loading = false;
-				this.helperDetail = r.data;
-				uni.setNavigationBarTitle({ title: r.data.title });
-			}).catch(() => {
-				this.loading = false;
-			});
-		}
-	}
+	
 };
 </script>
 

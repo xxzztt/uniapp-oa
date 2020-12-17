@@ -1,155 +1,91 @@
 <template>
 	<view class="secret">
-		<view class="notify-list" >
-			<view  v-for="(item, index) in noticeList" :key="index" class="row" @tap="navTo(item)">
+		<view class="notify-list">
+			<view class="row" @tap="navTo(1)">
 				<view class="carrier">
 					<view class="notify-wrapper">
-						<view class="title in3line">{{item.notifySenderForMember.title}}</view>
-						<view class="time">{{item.created_at | time}}</view>
-						<view class="un-read" :class="'bg-'+themeColor.name" v-if="item.is_read.toString() === '0'"></view>
+						<view class="title in3line">办公系统正式启用办公系统正式启用办公系统正式启用</view>
+						<view class="time">2020-12-12</view>
+						<view class="un-read" :class="'bg-'+themeColor.name"></view>
+					</view>
+				</view>
+			</view>
+			<view class="row" @tap="navTo(1)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in3line">办公系统正式启用办公系统正式启用办公系统正式启用</view>
+						<view class="time">2020-12-12</view>
+						<view class="un-read" :class="'bg-'+themeColor.name"></view>
+					</view>
+				</view>
+			</view>
+			<view class="row" @tap="navTo(1)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in3line">办公系统正式启用办公系统正式启用办公系统正式启用办公系统正式启用</view>
+						<view class="time">2020-12-12</view>
+						<view class="un-read" :class="'bg-'+themeColor.name"></view>
 					</view>
 				</view>
 			</view>
 		</view>
-
-		<oa-load-more v-if="noticeList.length > 0" :status="loadingType" />
-		<oa-empty
-			:info="'还没有内容~'"
-			v-if="noticeList.length === 0 && !loading"
-		></oa-empty>
-		<!--加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
 	</view>
 
 </template>
 
 <script>
-import { notifyIndex,notifyRead } from '@/api/userInfo';
-import rfLoadMore from '@/components/oa-load-more/oa-load-more';
-import moment from '@/common/moment';
-import $mAssetsPath from '@/config/assets.config';
-export default {
-	components: {
-		rfLoadMore
-	},
-	data() {
-		return {
-			noticeList: [],
-			page: 1,
-			loadingType: 'more',
-			loading: true,
-			hasLogin: false,
-			moneySymbol: this.moneySymbol,
-			// 控制滑动效果
-			theIndex: null,
-			oldIndex: null
-		};
-	},
-	filters: {
-		time(val) {
-			return moment(val * 1000).format('YYYY-MM-DD HH:mm');
+	export default {
+		onShow() {
+			this.initData();
 		},
-	},
-	onShow() {
-		this.initData();
-	},
+		methods: {
+			// 数据初始化
+			initData() {
 
-	// 下拉刷新
-	onPullDownRefresh() {
-		this.page = 1;
-		this.noticeList = [];
-		this.loading = true;
-		this.getNotifyList('refresh');
-	},
-	// 加载更多
-	onReachBottom() {
-  if (this.loadingType === 'nomore') return;
-		this.page++;
-		this.getNotifyList();
-	},
-
-	methods: {
-
-		// 数据初始化
-		initData() {
-			this.hasLogin = this.$mStore.getters.hasLogin;
-			this.page = 1;
-			this.noticeList.length = 0;
-			this.getNotifyList();
-			uni.setNavigationBarColor({
-			    frontColor: '#ffffff',
-			    backgroundColor: this.themeColor.color,
-			    animation: {
-			        duration: 400,
-			        timingFunc: 'easeIn'
-			    }
-			})
-		},
-		// 获取列表
-		async getNotifyList(type) {
-			await this.$http
-				.get(`${notifyIndex}`, {
-					page: this.page,
-				}).then(r => {
-					this.loading = false;
-					if (type === 'refresh') {
-						uni.stopPullDownRefresh();
+				uni.setNavigationBarColor({
+					frontColor: '#ffffff',
+					backgroundColor: this.themeColor.color,
+					animation: {
+						duration: 400,
+						timingFunc: 'easeIn'
 					}
-					this.loadingType = r.data.length === 10 ? 'more' : 'nomore';
-					this.noticeList = [...this.noticeList, ...r.data];
 				})
-				.catch(() => {
-					this.loading = false;
-					if (type === 'refresh') {
-						uni.stopPullDownRefresh();
-					}
+			},
 
+			// 通用跳转
+			async navTo(item) {
+				this.$mRouter.push({
+					route: `/pages/notice/detail?id=${item}`
 				});
-		},
-		// 通用跳转
-		async navTo(item) {
-			let route;
-			const id = item.notifySenderForMember.target_id;
-			const notifyId = item.notifySenderForMember.id;
-			if (item.is_read.toString() === '0') {
-				await this.$http.get(notifyRead, {
-					notify_id: notifyId
-				}).then(() => {
-					this.page = 1;
-					this.loading = true;
-					this.notifyList = [];
-					this.getNotifyList();
-				});
-			}
-			this.$mRouter.push({
-				route: `/pages/notice/detail?id=${item.id}`
-			});
-		},
-	}
-};
+			},
+		}
+	};
 </script>
 
 <style lang="scss">
-page {
-	background-color: $page-color-base;
-}
-.secret {
-	.add-round{
-		position: fixed;
-		z-index: 999;
-		right: 30rpx;
-		bottom: 30rpx;
-		border-radius: 50%;
-		width: 120rpx;
-		height: 120rpx;
-		color: #fff;
-		text-align: center;
-		line-height: 120rpx;
-		font-weight: 100;
-		font-size: 80rpx;
+	page {
+		background-color: $page-color-base;
 	}
-	.notify-list {
+
+	.secret {
+		.add-round {
+			position: fixed;
+			z-index: 999;
+			right: 30rpx;
+			bottom: 30rpx;
+			border-radius: 50%;
+			width: 120rpx;
+			height: 120rpx;
+			color: #fff;
+			text-align: center;
+			line-height: 120rpx;
+			font-weight: 100;
+			font-size: 80rpx;
+		}
+
+		.notify-list {
 			margin-top: 20upx;
+
 			.read {
 				text-align: right;
 				margin-right: $spacing-base;
@@ -279,32 +215,32 @@ page {
 			}
 		}
 
-	.notify-empty {
-		position: fixed;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100vh;
-		padding-bottom: 100upx;
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-		align-items: center;
-		background: #fff;
-
-		.iconfont {
-			font-size: $font-lg + 100upx;
-		}
-
-		.empty-tips {
+		.notify-empty {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100vh;
+			padding-bottom: 100upx;
 			display: flex;
-			font-size: $font-sm + 2upx;
-			color: $font-color-disabled;
+			justify-content: center;
+			flex-direction: column;
+			align-items: center;
+			background: #fff;
 
-			.navigator {
-				margin-left: 16upx;
+			.iconfont {
+				font-size: $font-lg + 100upx;
+			}
+
+			.empty-tips {
+				display: flex;
+				font-size: $font-sm + 2upx;
+				color: $font-color-disabled;
+
+				.navigator {
+					margin-left: 16upx;
+				}
 			}
 		}
 	}
-}
 </style>

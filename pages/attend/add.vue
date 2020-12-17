@@ -62,15 +62,13 @@ import nativeUtil from "@/utils/native-nfc-util.js"
 export default {
 	data() {
 		return {
-			// classesType: [{key: '0',value: '早班'},{key: '1',value: '晚班'}],
-			// placeState: [{key: '0',value: '正常'},{key: '1',value: '异常'}],
 			sendDate: {
 				classes_id:1,
 				type:0,
 			},
 			place:{},
-			checkType:[],
-			classesType:[],
+			checkType:[{"key":"0","value":"签到"},{"key":"1","value":"签退"}],
+			classesType:[{"key":"1","value":"白班"}],
 			imageList: [],
 			btnLoading: false
 		};
@@ -85,10 +83,7 @@ export default {
 		    }
 		})
 	},
-	async onLoad(options) {
-		await this.getCheckType();
-		await this.getClasses();
-	},
+	
 	methods: {
 		// 监听反馈类型事件
 		handleClassesChange(e) {
@@ -96,21 +91,6 @@ export default {
 		},
 		handleStateChange(e) {
 			this.sendDate.type = e.detail.value;
-		},
-
-		async getCheckType() {
-			await this.$http
-				.get(`${attendCheckType}`, {})
-				.then(r => {
-					this.checkType = r.data;
-				})
-		},
-		async getClasses() {
-			await this.$http
-				.get(`${getAttendClasses}`, {})
-				.then(r => {
-					this.classesType = r.data;
-				})
 		},
 
 		// 打开相册选图
@@ -131,15 +111,7 @@ export default {
 		},
 		// 依次上传图片
 		handleUploadFile(data) {
-			const _this = this;
-			data.forEach(item => {
-				_this.$http
-					.upload(uploadImage, { filePath: item, name: 'file' })
-					.then(r => {
-						_this.imageList.push(r.data.url);
-					});
-			});
-			// console.log(_this.imageList);
+			this.$mHelper.toast('上传成功');
 		},
 		// 删除已选中图片
 		close(e) {
@@ -147,27 +119,7 @@ export default {
 		},
 		// 发送数据
 		async send() {
-			if(this.imageList.length==0){
-				uni.showToast({
-					title: '请上传图片',
-					icon: 'none',
-					duration: 1000
-				});
-			}else{
-			this.btnLoading = true;
-			this.sendDate.covers = JSON.stringify(this.imageList);
-			await this.$http
-				.post(`${check}`+`/create`, {
-					...this.sendDate
-				})
-				.then(() => {
-					this.btnLoading = false;
-					this.$mRouter.back();
-				})
-				.catch(() => {
-					this.btnLoading = false;
-				});
-				}
+			this.$mHelper.toast('提交成功');
 		}
 	}
 };

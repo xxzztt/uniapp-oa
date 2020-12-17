@@ -2,14 +2,14 @@
 	<view class="page">
 		<view class="input-title ">
 			<text>审核状态</text>
-			<template v-for="(works, index) in workState">
-				<template v-if="works.key==repairDetail.state">{{ works.value }}</template>
+			<template >
+				<template>审核</template>
 			</template>
 		</view>
 		<view class="input-title ">
 			<text>报修分类</text>
-			<template v-for="(cates, index) in workType">
-				<template v-if="cates.key==repairDetail.cate_id">{{ cates.value }}</template>
+			<template >
+				<template >资产报修</template>
 			</template>
 		</view>
 		<view class="input-title">
@@ -30,7 +30,7 @@
 						{{ item.approve }}
 					</view>
 					<view class="datetime">
-						{{item.name}} {{ item.suggest }} {{ item.time | time }}
+						{{item.name}} {{ item.suggest }} {{ item.time}}
 					</view>
 				</view>
 			</view>
@@ -44,11 +44,9 @@ import moment from '@/common/moment';
 export default {
 	data() {
 		return {
-			repairDetail: {},
-			approveDetail:{},
+			repairDetail: {"id":4,"merchant_id":2,"member_id":69,"cate_id":1,"content":"日常报修,2222","log":[{"id":68,"time":1602174818,"action":"repair/approve","suggest":"好好好的","name":"系统管理员","approve":"审批"},{"id":69,"time":1602174760,"action":"repair/audit","suggest":"好的","name":"古月","approve":"审核"},{"id":69,"time":1602174747,"action":"repair/apply","suggest":"提交申请","name":"古月","approve":"申请"}],"remind":0,"sort":0,"state":"approve","status":"repair/approve","created_at":1602174747,"updated_at":1602174818},
+			approveDetail:[{"id":68,"time":'2020-12-12:12:12:12',"action":"repair/approve","suggest":"好好好的","name":"系统管理员","approve":"审批"},{"id":69,"time":'2020-12-12:12:12:12',"action":"repair/audit","suggest":"好的","name":"古月","approve":"审核"},{"id":69,"time":'2020-12-12:12:12:12',"action":"repair/apply","suggest":"提交申请","name":"古月","approve":"申请"}],
 			imageList: [],
-			workState: [],
-			workType: [],
 			id: undefined,
 			loading: true
 		};
@@ -63,64 +61,9 @@ export default {
 		    }
 		})
 	},
-	filters: {
-		// 时间格式化
-		time(val) {
-			return moment(val * 1000).format('YYYY-MM-DD HH:mm');
-		}
-	},
-	onLoad(event) {
-		this.id = event.id;
-		this.getrepairDetail(event.id);
-		this.getworkState();
-		this.getworkType();
-	},
+	
 	methods: {
-		// 获取详情
-		async getrepairDetail(id) {
-			await this.$http
-				.get(`${repair}`+'/view?id='+`${id}`)
-				.then(r => {
-					this.loading = false;
-					this.repairDetail = r.data.model;
-					this.approveDetail = r.data.model.log;
-					this.imageList = JSON.parse(r.data.covers);
-					uni.setNavigationBarTitle({
-						title: r.data.title
-					});
-				})
-				.catch(() => {
-					this.loading = false;
-				});
-		},
-		//获取状态
-		async getworkState() {
-			await this.$http
-				.get(`${workState}`, {})
-				.then(r => {
-					this.workState = r.data;
-				})
-				.catch(() => {
-					this.loading = false;
-					if (type === 'refresh') {
-						uni.stopPullDownRefresh();
-					}
-				});
-		},
-		//获取类型
-		async getworkType() {
-			await this.$http
-				.get(`${getRepairType}`, {})
-				.then(r => {
-					this.workType = r.data;
-				})
-				.catch(() => {
-					this.loading = false;
-					if (mtype === 'refresh') {
-						uni.stopPullDownRefresh();
-					}
-				});
-		},
+
 	}
 };
 </script>

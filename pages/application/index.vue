@@ -15,8 +15,8 @@
 				</view>
 			</view>
 			<!-- 日常管理 -->
-			<list-cell icon="iconyingyong" :iconColor="themeColor.color" navigateType=""  title="日常管理" v-if="role==0"></list-cell>
-			<view class="category-list" v-if="role==0">
+			<list-cell icon="iconyingyong" :iconColor="themeColor.color" navigateType=""  title="日常管理" ></list-cell>
+			<view class="category-list">
 				<view class="category" v-for="(item, index) in manageSectionList" :key="index" @tap.stop="navTo(item.url)">
 					<view >
 						<view class="img">
@@ -75,8 +75,6 @@
 
 		data() {
 			return {
-				user: {},
-				role:1,
 				hasLogin: false,
 				worksList: this.$mConstDataConfig.worksList,
 				studySectionList: this.$mConstDataConfig.studySectionList,
@@ -102,9 +100,7 @@
 		methods: {
 			// 数据初始化
 			initData() {
-				this.hasLogin = this.$mStore.getters.hasLogin;
-				this.user = uni.getStorageSync('user');
-				this.role = this.user?this.user.member.role_id:1;
+				this.hasLogin = true;
 				uni.setNavigationBarColor({
 					frontColor: '#ffffff',
 					backgroundColor: this.themeColor.color,
@@ -114,16 +110,7 @@
 					}
 				})
 			},
-			// 获取用户信息
-			async getMemberInfo() {
-				await this.$http
-					.get(memberInfo)
-					.then(async r => {
-						this.loading = false;
-						this.userInfo = r.data;
-					})
-
-			},
+			
 			// 统一跳转接口,拦截未登录路由
 			navTo(route) {
 				if (!route) return;

@@ -2,17 +2,11 @@
 	<view class="page">
 		<view class="feedback-title">
 			<text>问题和意见</text>
-			<text class="feedback-quick" @tap="chooseMsg"
-				>快速键入 <text class="iconfont iconxia"></text
-			></text>
+			<text class="feedback-quick" @tap="chooseMsg">快速键入 <text class="iconfont iconxia"></text></text>
 		</view>
 		<view class="feedback-body">
-			<textarea
-				placeholder="请详细描述您的问题和意见..."
-				v-model="sendDate.content"
-				class="feedback-textare"
-			/>
-		</view>
+			<textarea placeholder="请详细描述您的问题和意见..." v-model="sendDate.content" class="feedback-textare" />
+			</view>
 		<view class="feedback-title">
 			<text>图片(选填,提供问题截图,总大小10M以下)</text>
 		</view>
@@ -83,7 +77,7 @@
 </template>
 
 <script>
-import { opinionCreate, uploadImage } from '@/api/userInfo';
+import { opinionCreate } from '@/api/userInfo';
 export default {
 	data() {
 		return {
@@ -151,14 +145,7 @@ export default {
 		},
 		// 依次上传图片
 		handleUploadFile(data) {
-			const _this = this;
-			data.forEach(item => {
-				_this.$http
-					.upload(uploadImage, { filePath: item, name: 'file' })
-					.then(r => {
-						_this.imageList.push(r.data.url);
-					});
-			});
+			this.$mHelper.toast('上传成功');
 		},
 		// 删除已选中图片
 		close(e) {
@@ -175,19 +162,7 @@ export default {
 		},
 		// 发送反馈
 		async send() {
-			this.btnLoading = true;
-			this.sendDate.covers = JSON.stringify(this.imageList);
-			await this.$http
-				.post(`${opinionCreate}`+`/create`, {
-					...this.sendDate
-				})
-				.then(() => {
-					this.btnLoading = false;
-					this.$mRouter.back();
-				})
-				.catch(() => {
-					this.btnLoading = false;
-				});
+			this.$mHelper.toast('意见反馈成功');
 		}
 	}
 };

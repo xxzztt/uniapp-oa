@@ -69,14 +69,7 @@
 </template>
 
 <script>
-/**
- * @des 意见反馈详情
- *
- * @author hjp1011 21931118@qq.com
- * @date 2020-03-11 10:20
- * @copyright 2019
- */
-import { opinionDetail } from '@/api/userInfo';
+
 export default {
 	data() {
 		return {
@@ -107,25 +100,7 @@ export default {
 		    }
 		})
 	},
-	onLoad(options) {
-		this.initData(options);
-	},
-	methods: {
-		// 数据初始化
-		initData(options) {
-			this.getFeedbackDetail(options.id);
-		},
-		// 获取反馈详情
-		async getFeedbackDetail(id) {
-			await this.$http
-				.get(`${opinionDetail}`, {
-					id
-				})
-				.then(r => {
-					this.feedbackDetail = r.data;
-				});
-		}
-	}
+	
 };
 </script>
 

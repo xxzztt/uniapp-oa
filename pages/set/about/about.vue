@@ -1,5 +1,5 @@
 <template>
-	<view class="about" v-if="!loading">
+	<view class="about">
 		<view
 			class="list-cell b-b"
 			v-for="item in navList"
@@ -21,8 +21,7 @@
 			</view>
 			<view class="qrcode-wrapper">
 				<view class="qrcode-img-wrapper">
-					<oa-qrcode class="qrcode" cid="qrcode2229" makeOnLoad :text="hostUrl" v-if="merchantId === '0'"></oa-qrcode>
-					<oa-image class="qrcode-img" :src="aboutInfo.qrcode || ''" v-else></oa-image>
+					<oa-image class="qrcode-img" :src="aboutInfo.qrcode || ''" ></oa-image>
 				</view>
 				<text class="info">扫码后在浏览器打开</text>
 			</view>
@@ -30,17 +29,7 @@
 	</view>
 </template>
 <script>
-/**
- * @des 关于
- *
- * @author hjp1011 21931118@qq.com
- * @date 2019-12-09 10:13
- * @copyright 2019
- */
-import { merchantView } from '@/api/merchant';
-import rfQrcode from '@/components/oa-qrcode';
 export default {
-	components: { rfQrcode },
 	data() {
 		return {
 			aboutInfo: {},
@@ -51,9 +40,6 @@ export default {
 				{ title: '隐私协议', url: 'protocol_privacy' }
 			],
 			appName: this.$mSettingConfig.appName,
-			loading: true,
-			hostUrl: this.$mConfig.hostUrl,
-			merchantId: ''
 		};
 	},
 	onShow() {
@@ -72,12 +58,9 @@ export default {
 	methods: {
 		// 初始化数据
 		initData() {
-			uni.setNavigationBarTitle({ title: `关于${this.appName}` });
+			uni.setNavigationBarTitle({ title: `关于维博网络` });
 			const userInfo = uni.getStorageSync('userInfo') || {};
-			this.merchantId = userInfo.merchant_id;
-			this.loading = false;
 		},
-		
 		// 统一跳转接口
 		navTo(route) {
 			this.$mRouter.push({ route });

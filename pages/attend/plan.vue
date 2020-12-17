@@ -24,32 +24,17 @@
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navToAdd(`/pages/attend/add`)">
 			<text class="cuIcon-add text-xxl"></text>
 		</view>
-		<oa-load-more v-if="recordList.length > 0" :status="loadingType" />
-		<oa-empty :info="'还没有内容~'" v-if="recordList.length === 0 && !loading"></oa-empty>
 		<!--加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
 	</view>
 
 </template>
 
 <script>
-	import {
-		check,
-		attendPlan,
-		attendPlanState,
-		attendCheckState
-		// getCarType
-	} from '@/api/basic';
 	import uniCalendar from '@/components/oa-calendar/oa-calendar.vue'
-	import rfLoadMore from '@/components/oa-load-more/oa-load-more';
 	import moment from '@/common/moment';
-	import $mAssetsPath from '@/config/assets.config';
-	import mConstData from '@/config/constData.config';
-	import oaEmpty from '@/components/oa-empty';
 	export default {
 		components: {
-			rfLoadMore,
-			uniCalendar,oaEmpty
+			uniCalendar
 		},
 		data() {
 			return {
@@ -57,16 +42,9 @@
 				selectdate: undefined,
 				startTime: moment().startOf('day').format('YYYY-MM-DD'),
 				getList: [],
-				planState: [],
-				checkState: [],
-				selected: [],
-				shijian: [],
-				planList: [],
+				checkState: [{"key":0,"value":"未打卡"},{"key":1,"value":"正常"},{"key":2,"value":"迟到"},{"key":3,"value":"早退"}],
+				selected: [{date: '2020-12-12',info: "考勤"},{date: '2020-12-13',info: "考勤"},{date: '2020-12-14',info: "考勤"}],
 				recordList: [],
-				page: 1,
-				loadingType: 'more',
-				loading: true,
-				hasLogin: false,
 				// 控制滑动效果
 				theIndex: null,
 				oldIndex: null
@@ -109,7 +87,6 @@
 				this.page = 1;
 				this.recordList.length = 0;
 				this.getList.length = 0;
-				this.getCheckState();
 				this.getPlanList();
 				this.getRecordList('', this.selectdate);
 				uni.setNavigationBarColor({
@@ -124,77 +101,17 @@
 
 			// 获取计划列表
 			async getPlanList(type) {
-				this.getList = [];
-				await this.$http
-					.get(`${attendPlan}`, {
-						page: this.page,
-					})
-					.then(r => {
-						this.loading = false;
-						if (type === 'refresh') {
-							this.planList = [];
-							uni.stopPullDownRefresh();
-						}
-						this.loadingType = r.data.length === 10 ? 'more' : 'nomore';
-						this.getList = [...this.getList, ...r.data];
-						for (let i = 0, m = 0; i < this.getList.length; i++) {
-							let check = this.getList[i].check_date.split(",");
-						}
-						for (let i = 0; i < this.getList.length; i++) {
-							this.shijian.push(this.getList[i].check_date);
-						}
-						this.shijian = this.shijian.toString();
-						this.shijian = this.shijian.split(",");
-						var arr = [...new Set(this.shijian)];
-						this.shijian = arr.sort((a, b) => {
-							return a > b
-						});
-						for (let j = 0; j < this.shijian.length; j++) {
-							this.selected.push({
-								date: this.shijian[j],
-								info: "考勤"
-							});
-						}
-					})
-					.catch(() => {
-						this.loading = false;
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-					});
+				this.getList = [{"id":"1","merchant_id":"2","member_id":"69","classes_id":"1","check_date":"2020-12-01,2020-12-02,2020-12-03,2020-12-04,2020-12-05,2020-12-06,2020-12-07,2020-12-08,2020-12-09,2020-12-10,2020-12-11,2020-12-12,2020-12-13,2020-12-14,2020-12-15,2020-12-16,2020-12-17,2020-12-18,2020-12-19,2020-12-20,2020-12-21,2020-12-22,2020-12-23,2020-12-24,2020-12-25,2020-12-26,2020-12-27,2020-12-28,2020-12-29,2020-12-30,2020-12-31","begin_time":"08:00:00","end_time":"18:00:00","status":"1","created_at":"1602046812","updated_at":"1605764620","member":{"id":"69","merchant_id":"2","department_id":"13","role_id":"18","username":"18986860543","password_hash":"$2y$13$AiBhEM4eFqzVPz4LDLkPBOk/z7Kbt3RJJiEwbVpZCTpi0qum0OHfK","auth_key":"PhdPH1ybPa3G5lKq4gf4IsOfSbX4X2IM","password_reset_token":"","type":"1","realname":"古月","head_portrait":"","gender":"1","qq":"219311","email":"21931118@qq.com","birthday":"1999-09-09","province_id":"0","city_id":"0","area_id":"0","address":"","mobile":"18986860543","home_phone":"","dingtalk_robot_token":"","visit_count":"251","last_time":"1608219242","last_ip":"171.115.80.26","role":"10","status":"1","created_at":"1601722792","updated_at":"1608219242"},"attendClasses":{"id":"1","merchant_id":"2","title":"白班","begin_time":"08:30:00","end_time":"17:00:00","status":"1","created_at":"1605834038","updated_at":"1606783421"},"check":[{"id":"32","merchant_id":"2","member_id":"69","classes_id":"1","type":"0","picture":"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/12/02/image_1606918536_fYvzCA8w.jpg","covers":"[\"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/12/02/image_1606918536_fYvzCA8w.jpg\"]","lon":"116.444908","lat":"39.917903","address":"北京市朝阳区秀水北街25号","state":"2","begin_time":"08:00:00","end_time":"18:00:00","status":"1","created_at":"1607001281","updated_at":"1607001281"},{"id":"33","merchant_id":"2","member_id":"69","classes_id":"1","type":"0","picture":"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/12/02/image_1606918536_fYvzCA8w.jpg","covers":"[\"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/12/02/image_1606918536_fYvzCA8w.jpg\"]","lon":"116.444908","lat":"39.917903","address":"北京市朝阳区秀水北街25号","state":"2","begin_time":"08:00:00","end_time":"18:00:00","status":"1","created_at":"1607318712","updated_at":"1607318712"}]}];
+				for (let i = 0, m = 0; i < this.getList.length; i++) {
+					let check = this.getList[i].check_date.split(",");
+				}
 			},
 			// 获取记录列表
 			getRecordList(type, date) {
-				this.recordList = [];
-				if (date) this.today = date;
-				else this.today = '9999';
-				this.$http
-					.get(`${check}`, {
-						page: this.page,
-						date: this.today
-					})
-					.then(r => {
-						if (type === 'refresh') {
-							this.recordList = [];
-							uni.stopPullDownRefresh();
-						}
-						this.recordList = r.data;
-					})
-					.catch(() => {
-						this.loading = false;
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-					});
+				this.recordList = [{"id":"33","merchant_id":"2","member_id":"69","classes_id":"1","type":"0","picture":"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/12/02/image_1606918536_fYvzCA8w.jpg","covers":"[\"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/12/02/image_1606918536_fYvzCA8w.jpg\"]","lon":"116.444908","lat":"39.917903","address":"北京市朝阳区秀水北街25号","state":"2","begin_time":"08:00:00","end_time":"18:00:00","status":"1","created_at":"1607318712","updated_at":"1607318712","member":{"id":"69","merchant_id":"2","department_id":"13","role_id":"18","username":"18986860543","password_hash":"$2y$13$AiBhEM4eFqzVPz4LDLkPBOk/z7Kbt3RJJiEwbVpZCTpi0qum0OHfK","auth_key":"PhdPH1ybPa3G5lKq4gf4IsOfSbX4X2IM","password_reset_token":"","type":"1","realname":"古月","head_portrait":"","gender":"1","qq":"219311","email":"21931118@qq.com","birthday":"1999-09-09","province_id":"0","city_id":"0","area_id":"0","address":"","mobile":"18986860543","home_phone":"","dingtalk_robot_token":"","visit_count":"251","last_time":"1608219242","last_ip":"171.115.80.26","role":"10","status":"1","created_at":"1601722792","updated_at":"1608219242"},"attendClasses":{"id":"1","merchant_id":"2","title":"白班","begin_time":"08:30:00","end_time":"17:00:00","status":"1","created_at":"1605834038","updated_at":"1606783421"}},{"id":"32","merchant_id":"2","member_id":"69","classes_id":"1","type":"0","picture":"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/12/02/image_1606918536_fYvzCA8w.jpg","covers":"[\"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/12/02/image_1606918536_fYvzCA8w.jpg\"]","lon":"116.444908","lat":"39.917903","address":"北京市朝阳区秀水北街25号","state":"2","begin_time":"08:00:00","end_time":"18:00:00","status":"1","created_at":"1607001281","updated_at":"1607001281","member":{"id":"69","merchant_id":"2","department_id":"13","role_id":"18","username":"18986860543","password_hash":"$2y$13$AiBhEM4eFqzVPz4LDLkPBOk/z7Kbt3RJJiEwbVpZCTpi0qum0OHfK","auth_key":"PhdPH1ybPa3G5lKq4gf4IsOfSbX4X2IM","password_reset_token":"","type":"1","realname":"古月","head_portrait":"","gender":"1","qq":"219311","email":"21931118@qq.com","birthday":"1999-09-09","province_id":"0","city_id":"0","area_id":"0","address":"","mobile":"18986860543","home_phone":"","dingtalk_robot_token":"","visit_count":"251","last_time":"1608219242","last_ip":"171.115.80.26","role":"10","status":"1","created_at":"1601722792","updated_at":"1608219242"},"attendClasses":{"id":"1","merchant_id":"2","title":"白班","begin_time":"08:30:00","end_time":"17:00:00","status":"1","created_at":"1605834038","updated_at":"1606783421"}}];
+				
 			},
-			//获取状态
-			async getCheckState() {
-				await this.$http
-					.get(`${attendCheckState}`, {})
-					.then(r => {
-						this.checkState = r.data;
-					})
-			},
+			
 			navToAdd(route) {
 				this.$mRouter.push({
 					route: route

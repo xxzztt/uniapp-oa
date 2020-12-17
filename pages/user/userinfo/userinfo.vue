@@ -6,13 +6,13 @@
 			<!--#ifdef H5-->
 			<!--h5直接上传头像-->
 			<view class="portrait-box" @tap="uploadImage">
-				<image class="portrait" :src="profileInfo.head_portrait || headImg"></image>
+				<image class="portrait" :src="headImg"></image>
 			</view>
 			<!-- #endif -->
 			<!--#ifndef H5-->
 			<!--非h5裁剪头像上传-->
 			<view class="portrait-box">
-				<avatar canRotate="false" selWidth="200px" selHeight="400upx" @upload="handleUploadFile" :avatarSrc="profileInfo.head_portrait || headImg"
+				<avatar canRotate="false" selWidth="200px" selHeight="400upx" @upload="handleUploadFile" :avatarSrc="headImg"
 				 avatarStyle="width: 200upx; height: 200upx; border-radius: 100%; border: 6upx solid #fff;">
 				</avatar>
 			</view>
@@ -59,28 +59,10 @@
 			</button>
 		</view>
 
-		<!--加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
-
-		<!--进度条加载-->
-		<oa-load-progress :height="CustomBar" :progress="loadProgress"></oa-load-progress>
 	</view>
 </template>
 
 <script>
-	/**
-	 * @des 修改用户信息
-	 *
-	 * @author hjp1011 21931118@qq.com
-	 * @date 2020-01-10 14:28
-	 * @copyright 2019
-	 */
-	import {
-		memberInfo,
-		memberUpdate,
-		uploadImage,
-		addressDetail
-	} from '@/api/userInfo';
 	import avatar from '@/components/oa-avatar/oa-avatar';
 	import moment from '@/common/moment';
 	import rfPickRegions from '@/components/oa-pick-regions';
@@ -91,10 +73,15 @@
 		},
 		data() {
 			return {
-
-				loadProgress: 0,
-				CustomBar: this.CustomBar,
-				profileInfo: {},
+				profileInfo: {
+					"username": "18986860543",
+					"realname": "古月",
+					"gender": "1",
+					"qq": "219311",
+					"email": "21931118@qq.com",
+					"birthday": "1999-09-09",
+					"mobile": "18986860543"
+				},
 				genders: [{
 						value: '0',
 						name: '未知'
@@ -127,7 +114,7 @@
 			})
 		},
 		onLoad() {
-			this.initData();
+			// this.initData();
 		},
 		methods: {
 			// 获取选择的地区
@@ -152,17 +139,7 @@
 			},
 			// 上传头像
 			handleUploadFile(data) {
-				const _this = this;
-				const filePath = data.path || data[0];
-				_this.$http
-					.upload(uploadImage, {
-						filePath,
-						name: 'file'
-					})
-					.then(r => {
-						_this.profileInfo.head_portrait = r.data.url;
-						_this.handleUpdateInfo(_this.profileInfo);
-					});
+				this.$mHelper.toast('头像上传中...');
 			},
 			// 监听日期更改
 			bindDateChange(e) {
@@ -172,58 +149,12 @@
 			handleGenderChange(e) {
 				this.profileInfo.gender = e.detail.value;
 			},
-			// 数据初始化
-			async initData() {
-				this.token = uni.getStorageSync('accessToken') || undefined;
-				this.getMemberInfo();
-				
-			},
-
-			// },
-			// 获取用户信息
-			async getMemberInfo() {
-				await this.$http
-					.get(memberInfo)
-					.then(r => {
-						this.loading = false;
-						this.profileInfo = r.data;
-						this.date = this.profileInfo.birthday;
-
-					})
-					.catch(() => {
-						this.loading = false;
-					});
-			},
 
 			// 更新用户信息
 			async toUpdateInfo() {
-				this.handleUpdateInfo();
+				this.$mHelper.toast('恭喜您, 资料修改成功!');
 			},
-			// 更新用户信息
-			async handleUpdateInfo() {
-				this.btnLoading = true;
-				this.loadProgress = this.loadProgress + 6;
-				const timer = setInterval(() => {
-					this.loadProgress = this.loadProgress + 6;
-				}, 50);
-				await this.$http
-					.put(`${memberUpdate}?id=${this.profileInfo.id}`, {
-						...this.profileInfo,
-						birthday: this.date,
-						role: 10,
-					})
-					.then(() => {
-						clearInterval(timer);
-						this.loadProgress = 0;
-						this.$mHelper.toast('恭喜您, 资料修改成功!');
-						setTimeout(() => {
-							this.$mRouter.back();
-						}, 1 * 1000);
-					})
-					.catch(() => {
-						this.btnLoading = false;
-					});
-			}
+
 		}
 	};
 </script>

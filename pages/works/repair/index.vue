@@ -1,20 +1,81 @@
 <template>
 	<view class="repair">
 		<view class="repair-list">
-			<view v-for="(item, index) in repairList" :key="index" class="row" @tap="navTo(`/pages/works/repair/detail?id=${item.id}`)">
+			<view  class="row" @tap="navTo(`/pages/works/repair/detail?id=1`)">
 				<view class="carrier">
 					<view class="repair-wrapper">
 						<view class="title in1line">
-							<template v-for="(cates, index) in workType">
-								<template v-if="cates.key==item.cate_id">{{ cates.value }}</template>
-							</template>
+								<template >日常报修</template>
 							-
-							<template v-for="(works, index) in workState">
-								<template v-if="works.key==item.state">{{ works.value }}</template>
-							</template>
+								<template >审核</template>
 						</view>
-						<view class="content in2line">{{item.content}}</view>
-						<view class="time">{{item.member.realname}} {{item.created_at | time}}</view>
+						<view class="content in2line">日常报修日常报修日常报修日常报修日常报修</view>
+						<view class="time">张三 2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/repair/detail?id=1`)">
+				<view class="carrier">
+					<view class="repair-wrapper">
+						<view class="title in1line">
+								<template >日常报修</template>
+							-
+								<template >审核</template>
+						</view>
+						<view class="content in2line">日常报修日常报修日常报修日常报修日常报修</view>
+						<view class="time">张三 2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/repair/detail?id=1`)">
+				<view class="carrier">
+					<view class="repair-wrapper">
+						<view class="title in1line">
+								<template >日常报修</template>
+							-
+								<template >审核</template>
+						</view>
+						<view class="content in2line">日常报修日常报修日常报修日常报修日常报修</view>
+						<view class="time">张三 2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/repair/detail?id=1`)">
+				<view class="carrier">
+					<view class="repair-wrapper">
+						<view class="title in1line">
+								<template >日常报修</template>
+							-
+								<template >审核</template>
+						</view>
+						<view class="content in2line">日常报修日常报修日常报修日常报修日常报修</view>
+						<view class="time">张三 2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/repair/detail?id=1`)">
+				<view class="carrier">
+					<view class="repair-wrapper">
+						<view class="title in1line">
+								<template >日常报修</template>
+							-
+								<template >审核</template>
+						</view>
+						<view class="content in2line">日常报修日常报修日常报修日常报修日常报修</view>
+						<view class="time">张三 2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/repair/detail?id=1`)">
+				<view class="carrier">
+					<view class="repair-wrapper">
+						<view class="title in1line">
+								<template >日常报修</template>
+							-
+								<template >审核</template>
+						</view>
+						<view class="content in2line">日常报修日常报修日常报修日常报修日常报修</view>
+						<view class="time">张三 2020-12-12</view>
 					</view>
 				</view>
 			</view>
@@ -23,78 +84,24 @@
 		<view class="add-round bg-deepBlue" :class="'bg-' + themeColor.name" @click="navTo(`/pages/works/repair/add`)">
 			<text class="cuIcon-add text-xxl"></text>
 		</view>
-		<oa-load-more v-if="repairList.length > 0" :status="loadingType" />
-		<oa-empty :info="'还没有内容~'" v-if="repairList.length === 0 && !loading"></oa-empty>
-		<!--加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
 	</view>
 
 </template>
 
 <script>
-	import {
-		repair,
-		workState,
-		getRepairType
-	} from '@/api/basic';
-	import rfLoadMore from '@/components/oa-load-more/oa-load-more';
-	import moment from '@/common/moment';
-	import $mAssetsPath from '@/config/assets.config';
-	import mConstData from '@/config/constData.config';
-	import oaEmpty from '@/components/oa-empty';
 	export default {
-		components: {
-			rfLoadMore,
-			oaEmpty
-		},
 		data() {
 			return {
-				repairList: [],
-				workState: [],
-				workType: [],
-				page: 1,
-				loadingType: 'more',
-				loading: true,
-				hasLogin: false,
-				// 控制滑动效果
-				theIndex: null,
-				oldIndex: null
+				
 			};
 		},
-		filters: {
-			time(val) {
-				return moment(val * 1000).format('YYYY-MM-DD HH:mm:ss');
-			},
-
-		},
+		
 		onShow() {
 			this.initData();
 		},
-
-		// 下拉刷新
-		onPullDownRefresh() {
-			this.page = 1;
-			this.repairList = [];
-			this.loading = true;
-			this.getrepairList('refresh');
-		},
-		// 加载更多
-		onReachBottom() {
-			if (this.loadingType === 'nomore') return;
-			this.page++;
-			this.getrepairList();
-		},
-		async onLoad(options) {},
 		methods: {
-
 			// 数据初始化
 			initData() {
-				this.hasLogin = this.$mStore.getters.hasLogin;
-				this.page = 1;
-				this.repairList.length = 0;
-				this.getrepairList();
-				this.getworkState();
-				this.getworkType();
 				uni.setNavigationBarColor({
 					frontColor: '#ffffff',
 					backgroundColor: this.themeColor.color,
@@ -104,55 +111,7 @@
 					}
 				})
 			},
-			//获取状态
-			async getworkState() {
-				await this.$http
-					.get(`${workState}`, {})
-					.then(r => {
-						this.workState = r.data;
-					})
-					.catch(() => {
-						this.loading = false;
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-					});
-			},
-			//获取类型
-			async getworkType() {
-				await this.$http
-					.get(`${getRepairType}`, {})
-					.then(r => {
-						this.workType = r.data;
-					})
-					.catch(() => {
-						this.loading = false;
-						if (mtype === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-					});
-			},
-			// 获取列表
-			async getrepairList(type) {
-				await this.$http
-					.get(`${repair}`, {
-						page: this.page,
-					})
-					.then(r => {
-						this.loading = false;
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-						this.loadingType = r.data.length === 10 ? 'more' : 'nomore';
-						this.repairList = [...this.repairList, ...r.data];
-					})
-					.catch(() => {
-						this.loading = false;
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-					});
-			},
+			
 			navTo(route) {
 				this.$mRouter.push({
 					route

@@ -14,37 +14,17 @@
 				</view>
 			</view>
 		</view>
-
-		<oa-load-more v-if="studyList.length > 0" :status="loadingType" />
-		<oa-empty :info="'还没有内容~'" v-if="studyList.length === 0 && !loading"></oa-empty>
-		<!--加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
 	</view>
 
 </template>
 
 <script>
-	import {
-		studyList,articleCate
-	} from '@/api/basic';
-	import rfLoadMore from '@/components/oa-load-more/oa-load-more';
+
 	import moment from '@/common/moment';
-	import $mAssetsPath from '@/config/assets.config';
-	import oaEmpty from '@/components/oa-empty';
 	export default {
-		components: {
-			rfLoadMore,oaEmpty
-		},
 		data() {
 			return {
-				studyList: [],
-				page: 1,
-				cate_id:'',
-				cateTitle:'',
-				loadingType: 'more',
-				loading: true,
-				hasLogin: false,
-				moneySymbol: this.moneySymbol,
+				studyList: [{"id":"8","merchant_id":"2","title":"共创人类发展的美好未来","cover":"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/09/10/image_1599669475_VQXiR1bX.jpg","seo_key":"","seo_content":"","cate_id":"1","description":"“十三五”期间，中国不断扩大开放，深入推进共建“一带一路”，构建人类命运共同体共识不断巩固，务实合作根基不断夯实，全球治理空间不断拓展。","position":"0","content":"","link":"","author":"","view":"473","sort":"0","status":"1","created_at":"1601956562","updated_at":"1601956617"},{"id":"7","merchant_id":"2","title":"办公系统正式开通","cover":"http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/09/10/image_1599669347_KbFsxS3m.jpg","seo_key":"","seo_content":"","cate_id":"1","description":"办公系统正式开通，请大家下载安装应用","position":"0","content":"","link":"","author":"维博网络","view":"473","sort":"0","status":"1","created_at":"1601915568","updated_at":"1606156145"}],
 				// 控制滑动效果
 				theIndex: null,
 				oldIndex: null
@@ -57,32 +37,13 @@
 		},
 
 		async onLoad(options) {
-		this.cate_id = options.cate_id;
-		await this.initData();
-		},
-		// 下拉刷新
-		onPullDownRefresh() {
-			this.page = 1;
-			this.studyList = [];
-			this.loading = true;
-			this.getstudyList('refresh');
-		},
-		// 加载更多
-		onReachBottom() {
-			if (this.loadingType === 'nomore') return;
-			this.page++;
-			this.getstudyList();
+			await this.initData();
 		},
 		
 		methods: {
-
 			// 数据初始化
 			initData() {
 				this.hasLogin = this.$mStore.getters.hasLogin;
-				this.page = 1;
-				this.studyList.length = 0;
-				this.getCateTitle();
-				this.getstudyList();
 				uni.setNavigationBarColor({
 					frontColor: '#ffffff',
 					backgroundColor: this.themeColor.color,
@@ -93,46 +54,7 @@
 				});
 
 			},
-			// 获取资料列表
-			async getstudyList(type) {
-				await this.$http
-					.get(`${studyList}`, {
-						page: this.page,
-						cate_id:this.cate_id
-					})
-					.then(r => {
-						this.loading = false;
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-						this.loadingType = r.data.length === 10 ? 'more' : 'nomore';
-						this.studyList = [...this.studyList, ...r.data];
-					})
-					.catch(() => {
-						this.loading = false;
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-					});
-			},
-			// 获取分类标题
-			async getCateTitle() {
-				await this.$http
-					.get(`${articleCate}`, {
-						cate_id:this.cate_id
-					})
-					.then(r => {
-							this.cateTitle = r.data.title;
-					});
-					uni.setNavigationBarTitle({
-						title: this.cateTitle
-					});
-			},
-			navToLogin(route) {
-				this.$mRouter.push({
-					route
-				});
-			},
+			
 			navTo(route) {
 				this.$mRouter.push({
 					route

@@ -5,19 +5,9 @@
 				<!-- 轮播图1 -->
 				<view class="swiper">
 					<view class="swiper-box">
-						<oa-swipe-dot
-							:info="advList"
-							mode="nav"
-							:current="current"
-							field="adv_title"
-						>
+						<oa-swipe-dot :info="advList" mode="nav" :current="current" field="adv_title">
 							<swiper @change="handleDotChange" autoplay="true">
-								<swiper-item
-									v-for="(item, index) in advList"
-									@tap="navToNews(`/pages/study/detail?id=${item.jump_link}`)"
-									:key="index"
-
-								>
+								<swiper-item v-for="(item, index) in advList" :key="index">
 									<view class="swiper-item">
 										<image :src="item.cover" mode="aspectFill" />
 									</view>
@@ -31,52 +21,65 @@
 		<view class="promotion-center">
 			<list-cell icon="icongonggao" :iconColor="themeColor.color" @eventClick="navToLogin('/pages/notice/notice')" title="通知公告"></list-cell>
 		</view>
-		<view class="notify-list" v-if="notifyList.length > 0">
-			<view v-for="(item, index) in notifyList" :key="index" class="row" @tap="navTo(item)">
-				<!--  -->
+		<view class="notify-list">
+			<view class="row" @tap="navTo(1)">
 				<view class="carrier">
 					<view class="notify-wrapper">
-						<view class="title in3line">{{item.notifySenderForMember.title}}</view>
-						<!-- <view class="content in2line"><oa-parser lazy-load :html="item.notifySenderForMember.content"></oa-parser></view> -->
-						<view class="time">{{item.created_at | time}}</view>
-						<uni-tag class="type" type="error" :text="item.type | notifyTypeFilter" size="small" />
-						<view class="un-read" :class="'bg-'+themeColor.name" v-if="item.is_read.toString() === '0'"></view>
+						<view class="title in3line">办公系统正式启用办公系统正式启用办公系统正式启用办公系统正式启用</view>
+						<view class="time">2020-12-12</view>
+						<uni-tag class="type" type="error" :text="1 | notifyTypeFilter" size="small" />
+						<view class="un-read" :class="'bg-'+themeColor.name"></view>
 					</view>
 				</view>
-				<oa-load-more v-if="notifyList.length > 0" :status="loadingType" />
+			</view>
+			<view class="row" @tap="navTo(2)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in3line">办公系统正式启用办公系统正式启用办公系统正式启用办公系统正式启用</view>
+						<view class="time">2020-12-12</view>
+						<uni-tag class="type" type="error" :text="1 | notifyTypeFilter" size="small" />
+						<view class="un-read" :class="'bg-'+themeColor.name"></view>
+					</view>
+				</view>
+			</view>
+			<view class="row" @tap="navTo(3)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in3line">办公系统正式启用办公系统正式启用办公系统正式启用办公系统正式启用办公系统正式启用</view>
+						<view class="time">2020-12-12</view>
+						<uni-tag class="type" type="error" :text="1 | notifyTypeFilter" size="small" />
+						<view class="un-read" :class="'bg-'+themeColor.name"></view>
+					</view>
+				</view>
+			</view>
+			<view class="row" @tap="navTo(4)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in3line">办公系统正式启用办公系统正式启用办公系统正式启用办公系统正式启用办公系统正式启用</view>
+						<view class="time">2020-12-12</view>
+						<uni-tag class="type" type="error" :text="1 | notifyTypeFilter" size="small" />
+						<view class="un-read" :class="'bg-'+themeColor.name"></view>
+					</view>
+				</view>
+			</view>
+			<view class="row" @tap="navTo(5)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in3line">办公系统正式启用</view>
+						<view class="time">2020-12-12</view>
+						<uni-tag class="type" type="error" :text="1 | notifyTypeFilter" size="small" />
+						<view class="un-read" :class="'bg-'+themeColor.name"></view>
+					</view>
+				</view>
 			</view>
 		</view>
-		<view v-if="!hasLogin" class="notify-empty">
-			<view class="empty-tips">
-				暂未登录
-				<view class="navigator" :class="'text-'+themeColor.name" @tap="navToLogin('/pages/public/login')">登录/注册 ></view>
-			</view>
-		</view>
-		<!--页面加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
-		<!--版本更新-->
-		<!-- #ifdef APP-PLUS -->
-		<oa-version-upgrade
-			isTipsShow
-			@tip="handleTip"
-			@close="handleVersionUpgradeShow"
-			:isShow="isVersionUpgradeShow"
-		></oa-version-upgrade>
-		<!-- #endif -->
+
 	</view>
 
 </template>
 <script>
-	import {
-		notifyIndex,
-		notifyRead
-	} from '@/api/userInfo';
-	import rfVersionUpgrade from '@/components/oa-version-upgrade';
-	import rfLoadMore from '@/components/oa-load-more/oa-load-more';
 	import moment from '@/common/moment';
-	import mConstDataConfig from '@/config/constData.config';
 	import listCell from '@/components/oa-list-cell';
-	import { advList } from '@/api/basic';
 	import {
 		mapMutations
 	} from 'vuex';
@@ -84,36 +87,23 @@
 	import rfSwiperSlide from '@/components/oa-swiper-slide';
 	export default {
 		components: {
-			rfLoadMore,
 			listCell,
 			oaSwipeDot,
 			rfSwiperSlide,
-			rfVersionUpgrade
 		},
 		data() {
 			return {
-				isNewVersion: false,
-				isVersionUpgradeShow: false,
 				current: 0, // 轮播图index
-				advList: [], // 广告图
-				loading: true,
-				notifyList: [],
-				logo: this.$mSettingConfig.appLogo,
-				loadingType: 'more',
-				page: 1,
-				hasLogin: false,
-				// 控制滑动效果
-				theIndex: null,
-				oldIndex: null,
-				menuList: this.$mConstDataConfig.menuList,
+				advList: [{
+					"id": "4",
+					"adv_title": "巴盐古道-一条穿越时空的沧桑古道",
+					"cover": "http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/09/11/image_1599815054_N5jFSbzF.jpg"
+				}], // 广告图
 			};
 		},
 		filters: {
-			time(val) {
-				return moment(val * 1000).format('YYYY-MM-DD HH:mm:ss');
-			},
 			notifyTypeFilter(val) {
-				return mConstDataConfig.notifyTypeList[val].content;
+				return '公告';
 			}
 		},
 		onShow() {
@@ -128,128 +118,27 @@
 				return bottom;
 			}
 		},
-		// 下拉刷新
-		onPullDownRefresh() {
-			this.page = 1;
-			this.notifyList = [];
-			this.loading = true;
-			this.getNotifyList('refresh');
-			this.getAdvList('refresh');
-		},
-		// 加载更多
-		onReachBottom() {
-			if (this.loadingType === 'nomore') return;
-			this.page++;
-			this.getNotifyList();
-		},
 		methods: {
-			...mapMutations(['setNotifyNum']),
-			handleTip(isNewVersion) {
-				this.isNewVersion = isNewVersion;
-			},
-			handleVersionUpgradeShow() {
-				this.isVersionUpgradeShow = false;
-			},
 			// 监听轮播图切换
 			handleDotChange(e) {
 				this.current = e.detail.current;
 			},
 			// 数据初始化
 			initData() {
-				this.hasLogin = this.$mStore.getters.hasLogin;
-				// if(!this.hasLogin){
-				// 	this.$mRouter.push({
-				// 		route: '/pages/public/login'
-				// 	});
-				// }
-				this.page = 1;
-				this.loading = true;
-				this.notifyList = [];
-				this.getNotifyList();
-				this.getAdvList();
 				uni.setNavigationBarColor({
-				    frontColor: '#ffffff',
-				    backgroundColor: this.themeColor.color,
-				    animation: {
-				        duration: 400,
-				        timingFunc: 'easeIn'
-				    }
+					frontColor: '#ffffff',
+					backgroundColor: this.themeColor.color,
+					animation: {
+						duration: 400,
+						timingFunc: 'easeIn'
+					}
 				})
-			},
-			// 跳至广告图指定页面
-			indexTopToDetailPage(item) {
-				this.$mHelper.handleBannerNavTo(item.jump_type, item.jump_link, item.id);
-			},
-			//获取广告信息
-			async getAdvList(type) {
-				await this.$http
-					.get(`${advList}`, {cate_id:1})
-					.then(async r => {
-						// uni.setNavigationBarTitle({ title: this.appName });
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-						// 首页Adv赋值
-						// console.log(r.data);
-						this.advList = r.data;
-						this.loading = false;
-					})
-					.catch(() => {
-						this.loading = false;
-						if (type === 'refresh') {
-							uni.stopPullDownRefresh();
-						}
-					});
-			},
-			// 获取消息列表
-			async getNotifyList(type) {
-				
-				await this.$http.get(notifyIndex, {
-					page: this.page
-				}).then(r => {
-					this.loading = false;
-					if (type === 'refresh') {
-						uni.stopPullDownRefresh();
-					}
-					this.loadingType = r.data.length === 10 ? 'more' : 'nomore';
-					this.notifyList = [...this.notifyList, ...r.data];
-				}).catch(() => {
-					if (type === 'refresh') {
-						uni.stopPullDownRefresh();
-					}
-					this.loading = false;
-				});
-			},
-			async navToNews(route) {
-				this.$mRouter.push({
-					route
-				});
-			},
-			// 通用跳转
-			async navTo(item) {
-				let route;
-				const id = item.notifySenderForMember.target_id;
-				const notifyId = item.notifySenderForMember.id;
-				if (item.is_read.toString() === '0') {
-					await this.$http.get(notifyRead, {
-						notify_id: notifyId
-					}).then(() => {
-						this.page = 1;
-						this.loading = true;
-						this.notifyList = [];
-						this.getNotifyList();
-					});
-				}
-				// console.log('ok');
-				this.$mRouter.push({
-					route: `/pages/notice/detail?id=${item.id}`
-				});
 			},
 
 			// 通用跳转
-			navToLogin(route) {
+			async navTo(item) {
 				this.$mRouter.push({
-					route
+					route: `/pages/notice/detail?id=${item}`
 				});
 			},
 
@@ -260,13 +149,15 @@
 	page {
 		background-color: $page-color-base;
 	}
-/*轮播图*/
+
+	/*轮播图*/
 	.swiper {
 		width: 100%;
 		margin-top: 20upx;
 		margin-bottom: 20upx;
 		display: flex;
 		justify-content: center;
+
 		.swiper-box {
 			width: 92%;
 			height: 40vw;
@@ -276,9 +167,11 @@
 			//兼容ios，微信小程序
 			position: relative;
 			z-index: 1;
+
 			swiper {
 				width: 100%;
 				height: 40vw;
+
 				swiper-item {
 					image {
 						width: 100%;
@@ -288,6 +181,7 @@
 			}
 		}
 	}
+
 	.notify {
 
 		.promotion-center {

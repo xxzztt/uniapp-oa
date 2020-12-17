@@ -1,19 +1,17 @@
 <template>
 	<view>
-		<block v-if="styleLoginType === 'one'">
 			<view class="container">
 				<!--顶部返回按钮-->
 				<text class="back-btn iconfont iconzuo" @tap="navBack"></text>
 				<view class="right-top-sign"></view>
 				<view class="wrapper">
-					<view class="left-top-sign">{{ type == 1 ? 'UPDATE' : 'GET BACK' }}</view>
-					<view class="welcome"> {{ type == 1 ? '修改密码' : '找回密码' }}！ </view>
+					<view class="left-top-sign">GET BACK</view>
+					<view class="welcome"> 找回密码！ </view>
 					<view class="input-content">
 						<view class="input-item">
 							<text class="tit">手机号码</text>
 							<input
 								type="number"
-								v-model="resetPasswordParams.mobile"
 								placeholder="请输入手机号码"
 								maxlength="11"
 							/>
@@ -24,7 +22,6 @@
 									<view class="tit">验证码</view>
 									<input
 										type="number"
-										v-model="resetPasswordParams.code"
 										placeholder="请输入验证码"
 										maxlength="4"
 										data-key="mobile"
@@ -32,20 +29,15 @@
 								</view>
 								<button
 									class="sms-code-btn"
-									:disabled="smsCodeBtnDisabled"
-									@tap.stop="getSmsCode"
 								>
-									<text v-if="!smsCodeBtnDisabled">获取验证码</text>
-									<text v-else class="sms-code-resend">{{
-										`重新发送 (${codeSeconds})`
-										}}</text>
+									<text >获取验证码</text>
+									
 								</button>
 							</view>
 						</view>
 						<view class="input-item">
 							<text class="tit">密码</text>
 							<input
-								v-model="resetPasswordParams.password"
 								type="password"
 								placeholder="请输入密码"
 								maxlength="18"
@@ -55,7 +47,6 @@
 							<text class="tit">确认密码</text>
 							<input
 								type="password"
-								v-model="resetPasswordParams.password_repetition"
 								placeholder="请输入确认密码"
 							/>
 						</view>
@@ -63,197 +54,35 @@
 					<button
 						class="confirm-btn"
 						:class="'bg-' + themeColor.name"
-						:disabled="btnLoading"
-						:loading="btnLoading"
-						@tap="toUpdatePassword"
 					>
-						{{ type == 1 ? '修改密码' : '找回密码' }}
+						找回密码
 					</button>
 				</view>
-				<view class="register-section" v-if="type != 1">
+				<view class="register-section" >
 					又想起密码了?
 					<text @tap="navTo('/pages/public/login')">马上登录</text>
 					或者
 					<text @tap="toHome">返回主页</text>
 				</view>
-				<view class="register-section" v-else>
-					不想修改了密码？
-					<text @tap="toHome">返回主页</text>
-				</view>
+				
 			</view>
-		</block>
-		<view class="password-type-2" v-if="styleLoginType === 'two'">
-			<!--顶部返回按钮-->
-			<text class="back-btn iconfont iconzuo" @tap="navBack"></text>
-			<view class="login-top" :class="'bg-' + themeColor.name">
-				<view class="desc">
-					<view class="title">Hi~</view>
-					<text>{{ type == 1 ? '修改密码' : '找回密码' }}！</text>
-				</view>
-				<image class="login-pic" :src="loginPic"></image>
-			</view>
-			<view class="login-type-content">
-				<image class="login-bg" :src="loginBg"></image>
-				<view class="main">
-					<view class="login-type-form">
-						<view class="input-item">
-							<text class="iconfont icondianhua" :class="'text-' + themeColor.name"></text>
-							<input
-								class="login-type-input"
-								type="number"
-								name="mobile"
-								v-model="resetPasswordParams.mobile"
-								placeholder="请输入手机号码"
-								maxlength="11"
-							/>
-						</view>
-						<view class="input-item input-item-sms-code">
-							<text class="iconfont iconyanzhengma" :class="'text-' + themeColor.name"></text>
-							<view class="input-wrapper">
-								<view class="oa-input-wrapper">
-									<input
-										type="number"
-										class="login-type-input"
-										v-model="resetPasswordParams.code"
-										placeholder="请输入验证码"
-										maxlength="4"
-									/>
-								</view>
-								<button
-									class="sms-code-btn"
-									:disabled="smsCodeBtnDisabled"
-									@tap.stop="getSmsCode()"
-								>
-									<text v-if="!smsCodeBtnDisabled">获取验证码</text>
-									<text v-else class="sms-code-resend">{{
-										`重新发送 (${codeSeconds})`
-										}}</text>
-								</button>
-							</view>
-						</view>
-						<view class="input-item">
-							<text class="iconfont iconmimaffffffpx" :class="'text-' + themeColor.name"></text>
-							<input
-								class="login-type-input"
-								type="password"
-								v-model="resetPasswordParams.password"
-								placeholder="请输入密码"
-								maxlength="20"
-							/>
-						</view>
-						<view class="input-item">
-							<text class="iconfont iconmimaffffffpx" :class="'text-' + themeColor.name"></text>
-							<input
-								class="login-type-input"
-								type="password"
-								v-model="resetPasswordParams.password_repetition"
-								placeholder="请输入确认密码"
-								maxlength="20"
-							/>
-						</view>
-					</view>
-					<view class="login-type-tips">
-						<view @tap="navTo('/pages/public/login')" class="forget-section">
-							马上登陆
-						</view>
-						<text @tap="toHome">返回主页</text>
-					</view>
-					<button
-						class="confirm-btn"
-						:class="'bg-' + themeColor.name"
-						:disabled="btnLoading"
-						:loading="btnLoading"
-						@tap="toUpdatePassword"
-					>
-						{{ type == 1 ? '修改密码' : '找回密码' }}
-					</button>
-				</view>
-			</view>
-			<view class="login-type-bottom" :class="'text-' + themeColor.name">
-				{{ appName }} 版权所有
-			</view>
-		</view>
+		
 	</view>
 </template>
 
 <script>
-import { smsCode, updatePassword } from '@/api/login';
-import moment from '@/common/moment';
 export default {
 	data() {
 		return {
-			resetPasswordParams: {
-				mobile: '',
-				password: '',
-				password_repetition: '',
-				code: ''
-			},
-			btnLoading: false,
-			type: null,
-			smsCodeBtnDisabled: true,
-			loginBg: this.$mAssetsPath.loginBg,
-			loginPic: this.$mAssetsPath.loginPic,
-			appName: this.$mSettingConfig.appName,
-			styleLoginType: this.$mSettingConfig.styleLoginType,
-			reqBody: {},
-			codeSeconds: 0 // 验证码发送时间间隔
+			
 		};
 	},
 	
 	onLoad(options) {
-		const time =
-			moment().valueOf() / 1000 - uni.getStorageSync('pwdSmsCodeTime');
-		if (time < 60) {
-			this.codeSeconds =
-				this.$mConstDataConfig.sendCodeTime - parseInt(time, 10);
-			this.handleSmsCodeTime(this.codeSeconds);
-		} else {
-			this.codeSeconds = this.$mConstDataConfig.sendCodeTime;
-			this.smsCodeBtnDisabled = false;
-			uni.removeStorageSync('pwdSmsCodeTime');
-		}
-		this.type = options.type;
+		
 	},
 	methods: {
-		// 获取手机验证码
-		async getSmsCode() {
-			this.reqBody['mobile'] = this.resetPasswordParams['mobile'];
-			let checkSendCode = this.$mGraceChecker.check(
-				this.reqBody,
-				this.$mFormRule.sendCodeRule
-			);
-			if (!checkSendCode) {
-				this.$mHelper.toast(this.$mGraceChecker.error);
-				return;
-			}
-			await this.$http
-				.post(smsCode, {
-					mobile: this.resetPasswordParams.mobile,
-					usage: 'up-pwd'
-				})
-				.then(r => {
-					if (r.data) {
-						this.$mHelper.toast(`验证码发送成功, 验证码是${r.data}`);
-					} else {
-						this.$mHelper.toast('验证码已发送.');
-					}
-					this.smsCodeBtnDisabled = true;
-					uni.setStorageSync('pwdSmsCodeTime', moment().valueOf() / 1000);
-					this.handleSmsCodeTime(59);
-				});
-		},
-		handleSmsCodeTime(time) {
-			let timer = setInterval(() => {
-				if (time === 0) {
-					clearInterval(timer);
-					this.smsCodeBtnDisabled = false;
-				} else {
-					this.codeSeconds = time;
-					this.smsCodeBtnDisabled = true;
-					time--;
-				}
-			}, 1000);
-		},
+		
 		navBack() {
 			this.$mRouter.back();
 		},
@@ -263,44 +92,7 @@ export default {
 		toHome() {
 			this.$mRouter.reLaunch({ route: '/pages/index/index' });
 		},
-		// 更新密码
-		async toUpdatePassword() {
-			this.reqBody['mobile'] = this.resetPasswordParams['mobile'];
-			this.reqBody['password'] = this.resetPasswordParams['password'];
-			this.reqBody['code'] = this.resetPasswordParams['code'];
-			const cheRes = this.$mGraceChecker.check(
-				this.reqBody,
-				this.$mFormRule.resetPasswordRule
-			);
-			if (!cheRes) {
-				this.$mHelper.toast(this.$mGraceChecker.error);
-				return;
-			}
-			if (
-				this.resetPasswordParams['password'] !==
-				this.resetPasswordParams['password_repetition']
-			) {
-				this.$mHelper.toast('两次输入的密码不一致');
-				return;
-			}
-			this.reqBody['password_repetition'] = this.resetPasswordParams[
-				'password_repetition'
-			];
-			this.reqBody.group = this.$mHelper.platformGroupFilter();
-			await this.$http
-				.post(updatePassword, this.reqBody)
-				.then(() => {
-					this.btnLoading = false;
-					this.$mStore.commit('logout');
-					this.$mHelper.toast('密码重置成功');
-					uni.setStorageSync('loginMobile', this.reqBody['mobile']);
-					uni.setStorageSync('loginPassword', this.reqBody['password']);
-					this.$mRouter.push({ route: '/pages/public/login' });
-				})
-				.catch(() => {
-					this.btnLoading = false;
-				});
-		}
+		
 	}
 };
 </script>

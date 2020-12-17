@@ -5,29 +5,28 @@
 			<image class="bg" :src="userBg"></image>
 			<!--用户信息-->
 			<view class="user-info-box">
-				<view class="portrait-box" @tap="navTo(userInfo ? '/pages/user/userinfo/userinfo' : 'login')">
-					<image class="portrait" :src="userInfo.head_portrait || headImg"></image>
+				<view class="portrait-box" @tap="navTo(`/pages/public/login`)">
+					<image class="portrait" :src="headImg"></image>
 					<text class="username">
-						{{ userInfo.realname ||'登录/注册'}} {{ userInfo.department&&userInfo.department.title || ''}}
-					{{ userInfo.mobile || '没有填写手机号'}}
+						{{'登录/注册'}}
+						{{ '18986869999'}}
 					</text>
 				</view>
 			</view>
 			<!--vip信息-->
 			<view class="vip-card-box">
 				<view class="b-btn">
-					{{userInfo.role&&userInfo.role.title || '系统管理员'}}
+					{{'系统管理员'}}
 				</view>
 				<view class="tit">
 					<i class="iconfont iconzuanshi" />
-					{{ userInfo.merchant&&userInfo.merchant.company_name || '未知' }}
+					{{ '维博网络' }}
 				</view>
-				<text class="e-m">技术支持:QQ:21931118 Mail:21931118@qq.com</text>
+				<text class="e-m">技术交流请加QQ群:1107210028</text>
 			</view>
 		</view>
 		<!-- 个人中心 内容区-->
-
-		<view  class="cover-container" :style="[
+		<view class="cover-container" :style="[
 			{
 				transform: coverTransform,
 				transition: coverTransition
@@ -37,21 +36,10 @@
 			<image class="arc" :src="arc"></image>
 			<!--个人中心-->
 			<view class="promotion-center">
-				<list-cell
-					icon="iconicon1"
-					:iconColor="themeColor.color"
-					navigateType=""
-					title="个人中心"
-				></list-cell>
+				<list-cell icon="iconicon1" :iconColor="themeColor.color" navigateType="" title="个人中心"></list-cell>
 				<view class="order-section">
-					<view
-						class="order-item"
-						v-for="item in mycenterList"
-						:key="item.title"
-						@tap="navTo(item.url)"
-						hover-class="common-hover"
-						:hover-stay-time="50"
-					>
+					<view class="order-item" v-for="item in mycenterList" :key="item.title" @tap="navTo(item.url)" hover-class="common-hover"
+					 :hover-stay-time="50">
 						<i class="iconfont" :class="[item.icon, 'text-'+themeColor.name]" />
 						<text>{{ item.title }}</text>
 
@@ -59,7 +47,7 @@
 				</view>
 			</view>
 			<!-- 个人资料 -->
-			<view  class="set">
+			<view class="set">
 				<view class="list-cell b-b" :class="{ 'm-t': item.class === 'mT' }" v-for="item in setList" :key="item.title" @tap="navTo(item.url)"
 				 hover-class="cell-hover" :hover-stay-time="50">
 					<text class="cell-tit">{{ item.title }}</text>
@@ -69,7 +57,7 @@
 
 			</view>
 
-			<view class="cu-list menu sm-border card-menu" v-if="styleUserIsOpen">
+			<view class="cu-list menu sm-border card-menu">
 				<view class="cu-item">
 					<view class="content flex align-center">
 						<text class="cuIcon-colorlens" :class="'text-' + themeColor.name"></text>
@@ -88,80 +76,45 @@
 			<view v-if="hasLogin" class="list-cell log-out-btn" :class="'text-' + themeColor.name" @tap="toLogout">
 				<text class="cell-tit">退出登录</text>
 			</view>
-		<!--版本更新-->
-		<!-- #ifdef APP-PLUS -->
-		<oa-version-upgrade
-			isTipsShow
-			@tip="handleTip"
-			@close="handleVersionUpgradeShow"
-			:isShow="isVersionUpgradeShow"
-		></oa-version-upgrade>
-		<!-- #endif -->
-		<!-- 选择颜色模态框 -->
-		<view class="cu-modal" :class="{ show: colorModal }">
-			<view class="cu-dialog">
-				<view class="cu-bar justify-end solid-bottom">
-					<view class="content">选择颜色</view>
-					<view class="action" @tap="colorModal = false">
-						<text class="cuIcon-close text-red"></text>
-					</view>
-				</view>
-				<view class="grid col-5 padding">
-					<view
-						class="padding-xs"
-						v-for="(item, index) in themeList"
-						:key="index"
-						@tap="SetColor(item)"
-						:data-color="item.name"
-					>
-						<view class="padding-tb radius" :class="'bg-' + item.name">
-							{{ item.title }}
+			<!-- 选择颜色模态框 -->
+			<view class="cu-modal" :class="{ show: colorModal }">
+				<view class="cu-dialog">
+					<view class="cu-bar justify-end solid-bottom">
+						<view class="content">选择颜色</view>
+						<view class="action" @tap="colorModal = false">
+							<text class="cuIcon-close text-red"></text>
 						</view>
 					</view>
+					<view class="grid col-5 padding">
+						<view class="padding-xs" v-for="(item, index) in themeList" :key="index" @tap="SetColor(item)" :data-color="item.name">
+							<view class="padding-tb radius" :class="'bg-' + item.name">
+								{{ item.title }}
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
 
-
 		</view>
-		<!--页面加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
 	</view>
 </template>
 <script>
-	/**
-	 * @des 个人中心
-	 *
-	 * @author hjp1011 21931118@qq.com
-	 * @date 2020-01-10 11:41
-	 * @copyright 2019
-	 */
-	import {
-		memberInfo
-	} from '@/api/userInfo';
 	import {
 		mapMutations
 	} from 'vuex';
-	import $mAssetsPath from '@/config/assets.config';
 	import listCell from '@/components/oa-list-cell';
-	import { logout } from '@/api/login';
-	import rfVersionUpgrade from '@/components/oa-version-upgrade';
 	let startY = 0,
 		moveY = 0,
 		pageAtTop = true;
 	export default {
 		components: {
-			listCell,rfVersionUpgrade
+			listCell
 		},
 		data() {
 			return {
-				isNewVersion: false,
 				colorModal: false,
 				mycenterList: this.$mConstDataConfig.mycenterList,
 				themeList: this.$mConstDataConfig.themeList,
-				isVersionUpgradeShow: false,
-				loadProgress: 0,
-				styleUserIsOpen: this.$mSettingConfig.styleUserIsOpen,
 				setList: this.$mConstDataConfig.setList,
 				headImg: this.$mAssetsPath.headImg,
 				userBg: this.$mAssetsPath.userBg,
@@ -170,18 +123,6 @@
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
 				moving: false,
-				user_integral: 0,
-				userInfo: {
-					realname:'',
-					mobile:'',
-					merchant:null,
-					department:null,
-					role:null,
-				},
-				user: {},
-				loading: true,
-				appName: this.$mSettingConfig.appName,
-				hasLogin: false
 			};
 		},
 		async onShow() {
@@ -200,8 +141,7 @@
 			const index = e.index;
 			if (index === 0) {
 				this.navTo('/pages/set/set');
-			} else if (index === 1) {
-			}
+			} else if (index === 1) {}
 		},
 		// #endif
 		methods: {
@@ -211,27 +151,26 @@
 			handleVersionUpgradeShow() {
 				this.isVersionUpgradeShow = false;
 			},
-			...mapMutations(['login']),
 			// 数据初始化
 			async initData() {
-				this.user = uni.getStorageSync('user');
+				// this.user = uni.getStorageSync('user');
 				// 缓存大小
 				this.setList[2].content = `${uni.getStorageInfoSync().currentSize} kb`;
 				// #ifdef APP-PLUS
-				this.setList[5].content = `当前版本 ${plus.runtime.version}`;
+				this.setList[5].content = `当前版本 V1.0.0`;
 				// #endif
-				this.hasLogin = this.$mStore.getters.hasLogin;
+				this.hasLogin = false;
 				uni.setTabBarStyle({
 					selectedColor: this.themeColor.color,
 					borderStyle: 'white'
 				});
 				uni.setNavigationBarColor({
-				    frontColor: '#ffffff',
-				    backgroundColor: this.themeColor.color,
-				    animation: {
-				        duration: 400,
-				        timingFunc: 'easeIn'
-				    }
+					frontColor: '#ffffff',
+					backgroundColor: this.themeColor.color,
+					animation: {
+						duration: 400,
+						timingFunc: 'easeIn'
+					}
 				});
 				this.themeColor.tabList && this.themeColor.tabList.forEach((selectedIconPath, index) => {
 					uni.setTabBarItem({
@@ -239,28 +178,9 @@
 						selectedIconPath
 					});
 				});
-				if (this.hasLogin) {
-					await this.getMemberInfo();
-				} else {
-					this.loading = false;
-				}
+
 			},
-			// 退出登录
-			toLogout() {
-				uni.showModal({
-					content: '确定要退出登录么',
-					success: e => {
-						if (e.confirm) {
-							this.$http.post(`${logout}`).then(() => {
-								this.$mStore.commit('logout');
-								uni.reLaunch({
-									url: '/pages/profile/profile'
-								});
-							});
-						}
-					}
-				});
-			},
+
 			showColorModal() {
 				this.colorModal = true;
 			},
@@ -269,12 +189,12 @@
 				this.themeColor = item;
 				this.$mStore.commit('setThemeColor', item);
 				uni.setNavigationBarColor({
-				    frontColor: '#ffffff',
-				    backgroundColor: this.themeColor.color,
-				    animation: {
-				        duration: 400,
-				        timingFunc: 'easeIn'
-				    }
+					frontColor: '#ffffff',
+					backgroundColor: this.themeColor.color,
+					animation: {
+						duration: 400,
+						timingFunc: 'easeIn'
+					}
 				});
 				uni.setTabBarStyle({
 					selectedColor: this.themeColor.color,
@@ -287,67 +207,36 @@
 					});
 				});
 			},
-			// 获取用户信息
-			async getMemberInfo() {
-				await this.$http
-					.get(memberInfo)
-					.then(async r => {
-						this.loading = false;
-						this.userInfo = r.data;
-						// 更新userInfo缓存
-						uni.setStorageSync('userInfo', r.data);
-					})
-					.catch(() => {
-						this.hasLogin = false;
-						this.userInfo = {};
-						this.loading = false;
-					});
-			},
-
-			// 给个人中心的各模块赋值
-			setSectionData(data) {
-				this.user_level = data.role.title;
-				this.merchant = data.merchant;
-				this.department = data.department;
-				// 更新userInfo缓存
-				uni.setStorageSync('userInfo', data);
-			},
 
 			// 统一跳转接口,拦截未登录路由
 			navTo(route) {
 				if (!route) return;
-				if (!this.hasLogin) {
-					uni.removeStorageSync('backToPage');
-					this.$mRouter.push({
-						route: '/pages/public/login'
-					});
-				} else {
-					if (route === 'clearCache') {
-						uni.showModal({
-							content: '确定要清除缓存吗',
-							success: e => {
-								if (e.confirm) {
-									uni.clearStorageSync();
-									this.setList[2].content = '0 kb';
-									this.$mStore.commit('login', this.user);
-									this.$mHelper.toast('清除缓存成功');
-								}
+				if (route === 'clearCache') {
+					uni.showModal({
+						content: '确定要清除缓存吗',
+						success: e => {
+							if (e.confirm) {
+								uni.clearStorageSync();
+								this.setList[2].content = '0 kb';
+								this.$mStore.commit('login', this.user);
+								this.$mHelper.toast('清除缓存成功');
 							}
-						});
-						return;
-					} else if (route === 'versionUpgrade') {
-						this.isVersionUpgradeShow = true;
-						if (this.isNewVersion) {
-							this.$mHelper.toast('已经是最新版本');
 						}
-						return;
+					});
+					return;
+				} else if (route === 'versionUpgrade') {
+					this.isVersionUpgradeShow = true;
+					if (this.isNewVersion) {
+						this.$mHelper.toast('已经是最新版本');
 					}
+					return;
+				} else {
 					this.$mRouter.push({
 						route
 					});
 				}
 			},
-			
+				
 			coverTouchstart(e) {
 				if (pageAtTop === false) {
 					return;
@@ -392,6 +281,7 @@
 		.promotion-center {
 			background: #fff;
 			margin-bottom: 20upx;
+
 			/*分类列表*/
 			.category-list {
 				width: 100%;
@@ -399,12 +289,14 @@
 				border-bottom: solid 2upx #f6f6f6;
 				display: flex;
 				flex-wrap: wrap;
+
 				.category {
 					width: 33.3%;
 					margin-top: 50upx;
 					display: flex;
 					justify-content: center;
 					flex-wrap: wrap;
+
 					.img {
 						width: 100%;
 						display: flex;
@@ -422,6 +314,7 @@
 						font-size: 24upx;
 						color: #3c3c3c;
 					}
+
 					.share-btn {
 						height: 142upx;
 						text-align: left;
@@ -437,9 +330,11 @@
 				}
 			}
 		}
+
 		.order-section {
 			@extend %section;
 			padding: 28upx 0;
+
 			.order-item {
 				@extend %flex-center;
 				width: 120upx;
@@ -464,6 +359,7 @@
 				font-size: 44upx;
 			}
 		}
+
 		.no-foot-print {
 			text-align: center;
 			padding: 48upx 0;
@@ -473,16 +369,20 @@
 				margin-right: 10upx;
 			}
 		}
+
 		.set {
 			padding: $spacing-base 0;
 
 		}
+
 		.cu-list.card-menu {
 			margin: $spacing-base 0;
+
 			.title {
 				margin-left: $spacing-base;
 			}
 		}
+
 		.user-section {
 			height: 520upx;
 			padding: 100upx 30upx 0;

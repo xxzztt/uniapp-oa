@@ -2,12 +2,9 @@
 	<view class="oa-notice-detail">
 
 		<view class="input-title">
-			<text>{{worksDetail.content}}</text>
+			<text>明天请假一天，到北京办点事明天请假一天，到北京办点事，明天请假一天，到北京办点事,明天请假一天，到北京办点事明天请假一天，到北京办点事，明天请假一天，到北京办点事,明天请假一天，到北京办点事明天请假一天，到北京办点事，明天请假一天，到北京办点事</text>
 		</view>
 
-		<view class="covers-title" v-if="imageList.length !== 0 ">
-			<text>相关图片</text>
-		</view>
 		<view class="covers-body covers-uploader oa-uploader" v-if="imageList.length !== 0 ">
 			<view class="uni-uploader">
 				<view class="uni-uploader-head">
@@ -38,7 +35,7 @@
 						{{ item.approve }}
 					</view>
 					<view class="datetime">
-						{{item.name}} {{ item.suggest }} {{ item.time | time }}
+						{{item.name}} {{ item.suggest }} {{ item.time  }}
 					</view>
 				</view>
 			</view>
@@ -62,11 +59,8 @@
 </template>
 
 <script>
-	import { worksDetail } from '@/api/userInfo';
-	import { workState } from '@/api/basic';
-	import moment from '@/common/moment';
-
 	export default {
+		
 		data() {
 			return {
 				msgContents: [
@@ -79,39 +73,30 @@
 					suggest: '',
 					contact_way: ''
 				},
-				workState: [],
-				worksDetail: {},
-				approveDetail:{},
+				workState: [{"key":"apply","value":"申请"},{"key":"audit","value":"审核"},{"key":"approve","value":"审批"},{"key":"result","value":"终审"},{"key":"refused","value":"拒绝"}],
+				worksDetail: {"id":4,"merchant_id":2,"member_id":69,"cate_id":1,"content":"日常报修,2222","log":[{"id":68,"time":1602174818,"action":"repair/approve","suggest":"好好好的","name":"系统管理员","approve":"审批"},{"id":69,"time":1602174760,"action":"repair/audit","suggest":"好的","name":"古月","approve":"审核"},{"id":69,"time":1602174747,"action":"repair/apply","suggest":"提交申请","name":"古月","approve":"申请"}],"remind":0,"sort":0,"state":"approve","status":"repair/approve","created_at":1602174747,"updated_at":1602174818},
+				approveDetail:[{"id":68,"time":'2020-12-12:12:12:12',"action":"repair/approve","suggest":"好好好的","name":"系统管理员","approve":"审批"},{"id":69,"time":'2020-12-12:12:12:12',"action":"repair/audit","suggest":"好的","name":"古月","approve":"审核"},{"id":69,"time":'2020-12-12:12:12:12',"action":"repair/apply","suggest":"提交申请","name":"古月","approve":"申请"}],
 				approveId:'',
-				radioList:[],
-				imageList:[],
+				radioList:[{"key":"repair/audit","value":"审核"},{"key":"repair/refused","value":"拒绝"}],
+				imageList:['http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/09/10/image_1599669475_VQXiR1bX.jpg','http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/09/10/image_1599669475_VQXiR1bX.jpg','http://wephp-oa.oss-cn-shenzhen.aliyuncs.com/images/2020/09/10/image_1599669475_VQXiR1bX.jpg'],
 				id: undefined,
-				loading: true
 			};
 		},
-		computed: {
-
-		},
-		filters: {
-			// 时间格式化
-			time(val) {
-				return moment(val * 1000).format('YYYY-MM-DD HH:mm');
-			}
-		},
-		onLoad(event) {
-			this.id = event.id;
-			this.getWorksDetail(event.id);
-			this.getworkState();
-			// this.getworkType();
-		},
-		onShareAppMessage() {
-			return {
-				title: this.banner.title,
-				path: `/pages/index/notice/detail?id=${this.id}`
-			};
+		onShow() {
+			this.initData();
 		},
 		methods: {
-
+			initData() {
+				
+				uni.setNavigationBarColor({
+					frontColor: '#ffffff',
+					backgroundColor: this.themeColor.color,
+					animation: {
+						duration: 400,
+						timingFunc: 'easeIn'
+					}
+				})
+			},
 			// 快速输入
 			chooseMsg() {
 				uni.showActionSheet({
@@ -122,43 +107,8 @@
 				});
 			},
 
-			// 获取详情
-			async getWorksDetail(id) {
-				await this.$http
-					.get(`${worksDetail}`+'/view?id='+`${id}`)
-					.then(r => {
-						this.radioList = r.data.radioList;
-						this.approveId = id;
-						this.worksDetail = r.data.model;
-						this.approveDetail = r.data.model.log;
-						this.imageList = JSON.parse(r.data.model.covers);
-						uni.setNavigationBarTitle({
-							title: r.data.title
-						});
-					})
-					.catch(() => {
-						this.loading = false;
-					});
-			},
-		//获取状态
-		async getworkState() {
-			await this.$http
-				.get(`${workState}`, {})
-				.then(r => {
-					this.workState = r.data;
-				})
-				.catch(() => {
-					this.loading = false;
-					if (type === 'refresh') {
-						uni.stopPullDownRefresh();
-					}
-				});
-		},
-		async handleWorksOperation(status) {
-				await this.$http.put(`${worksDetail}`+'/update?id='+`${this.approveId}`, {status: status,suggest:this.sendDate.suggest}).then(() => {
-					this.$mHelper.toast('操作成功');
-					this.$mRouter.back();
-				});
+			async handleWorksOperation(status) {
+				this.$mHelper.toast('操作成功');
 			},
 		}
 	};

@@ -1,28 +1,71 @@
 <template>
 	<view class="visit">
 		<view class="notify-list">
-			<view v-for="(item, index) in worksList" :key="index" class="row" @tap="navTo(`/pages/works/detail?id=${item.id}`)">
+			<view  class="row" @tap="navTo(`/pages/works/detail?id=1`)">
 				<view class="carrier">
 					<view class="notify-wrapper">
-						<view class="title in1line">{{item.member.realname}}</view>
-						<view class="content in2line">{{item.content}}</view>
-						<view class="time">{{item.created_at | time}}</view>
+						<view class="title in1line">张三</view>
+						<view class="content in2line">明天请假一天，到北京办点事明天请假一天，到北京办点事，明天请假一天，到北京办点事</view>
+						<view class="time">2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/detail?id=1`)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in1line">张三</view>
+						<view class="content in2line">明天请假一天，到北京办点事明天请假一天，到北京办点事，明天请假一天，到北京办点事</view>
+						<view class="time">2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/detail?id=1`)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in1line">张三</view>
+						<view class="content in2line">明天请假一天，到北京办点事明天请假一天，到北京办点事，明天请假一天，到北京办点事</view>
+						<view class="time">2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/detail?id=1`)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in1line">张三</view>
+						<view class="content in2line">明天请假一天，到北京办点事明天请假一天，到北京办点事，明天请假一天，到北京办点事</view>
+						<view class="time">2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/detail?id=1`)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in1line">张三</view>
+						<view class="content in2line">明天请假一天</view>
+						<view class="time">2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/detail?id=1`)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in1line">张三</view>
+						<view class="content in2line">明天请假一天，到北京办点事明天请假一天，到北京办点事，明天请假一天，到北京办点事</view>
+						<view class="time">2020-12-12</view>
+					</view>
+				</view>
+			</view>
+			<view  class="row" @tap="navTo(`/pages/works/detail?id=1`)">
+				<view class="carrier">
+					<view class="notify-wrapper">
+						<view class="title in1line">张三</view>
+						<view class="content in2line">明天请假一天</view>
+						<view class="time">2020-12-12</view>
 					</view>
 				</view>
 			</view>
 		</view>
-
-		<oa-load-more v-if="worksList.length > 0" :status="loadingType" />
-		<oa-empty :info="'还没有内容~'" v-if="worksList.length === 0 && !loading"></oa-empty>
-		<view v-if="!hasLogin" class="works-empty">
-			<text class="iconfont iconxiaoxi-" :class="'text-'+themeColor.name"></text>
-			<view class="empty-tips">
-				暂未登录
-				<view class="navigator" :class="'text-'+themeColor.name" @tap="navToLogin('/pages/public/login')">登录/注册 ></view>
-			</view>
-		</view>
-		<!--加载动画-->
-		<rfLoading isFullScreen :active="loading"></rfLoading>
+		
 	</view>
 
 </template>
