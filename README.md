@@ -62,8 +62,6 @@ Uni-OA通用办公系统主要为国内企业提供办公自动化信息服务�
 
 >感谢开发过程中小明和简言对我的技术支持；感谢以下的项目，排名不分先后
 
-TinyShop-UniApp:https://github.com/stavyan/TinyShop-UniApp
-
 Vuejs： https://github.com/vuejs/vue
 
 uni-app： https://uniapp.dcloud.io/
