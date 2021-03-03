@@ -11,81 +11,69 @@ UNI办公系统主要为国内企业提供办公自动化信息服务，功能�
 #演示
 
 1. 后台演示账号：后台不开源，不免费提供后台账号及接口
-2. 手机端测试版：测试版自己加群下载，账密：18986860001/18986860001
+2. 手机端测试版：测试版自己加群下载，账密：18986860001/18986860001（请扫码H5或者安卓，苹果和小程序版不提供测试账号）
 3. 业务合作：加Q私聊
 ![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%B5%8B%E8%AF%95%E4%BA%8C%E7%BB%B4%E7%A0%81.png "屏幕截图.png")
 
 #手机端部分截图
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/021424_cf16e129_526830.png "banner.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/021433_98ee00e7_526830.png "banner2.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/021441_2da1b89a_526830.png "banner3.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/021447_6b9b2e35_526830.png "banner4.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%89%8B%E6%9C%BA%E6%88%AA%E5%9B%BE1.png "banner.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%89%8B%E6%9C%BA%E6%88%AA%E5%9B%BE2.png "banner2.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%89%8B%E6%9C%BA%E6%88%AA%E5%9B%BE3.png "banner3.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%89%8B%E6%9C%BA%E6%88%AA%E5%9B%BE4.png "banner4.png")
 
 #后台部分截图
 
 # 安装插件
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/212543_7cbf5a2b_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6.png "屏幕截图.png")
 # 已安装插件
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/212625_072d9ed1_526830.png "屏幕截图.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/211837_c27040c4_526830.png "屏幕截图.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/212019_017bc422_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%B7%B2%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6.png "屏幕截图.png")
 # 工作流列表
-![](https://images.gitee.com/uploads/images/2021/0226/213507_0bae368a_526830.png "屏幕截图.png")
+![](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%97%E8%A1%A8.png "屏幕截图.png")
 # 工作流配置
 ## 流程状态
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/213551_9056a989_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%B5%81%E7%A8%8B%E7%8A%B6%E6%80%81.png "屏幕截图.png")
 ## 配置审核人员
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/213714_1cdaa09a_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E9%85%8D%E7%BD%AE%E5%AE%A1%E6%A0%B8%E4%BA%BA%E5%91%98.png "屏幕截图.png")
 ```
 支持指定人员审核和指定角色审核
 ```
 ## 工作流转
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/213811_ff518d71_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%BD%AC.png "屏幕截图.png")
 ## 新增流程节点
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/214041_6f5cfcbe_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B%E8%8A%82%E7%82%B9.png "屏幕截图.png")
 # 待办工作
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/214708_aa6c0eb9_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%BE%85%E5%8A%9E%E5%B7%A5%E4%BD%9C.png "屏幕截图.png")
 # 已办工作
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/214850_8811d3c3_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%B7%B2%E5%8A%9E%E5%B7%A5%E4%BD%9C.png "屏幕截图.png")
 
 ```
 如果审核失误，在下一级没有审核的情况下，可点击重审按钮进行重新审核，流程将重新转入申请状态。
 ```
 
 # 审核工作
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/214803_bf66ca36_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%AE%A1%E6%A0%B8%E5%B7%A5%E4%BD%9C.png "屏幕截图.png")
 
 # 创建申请
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/215045_b3f0a825_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E5%88%9B%E5%BB%BA%E7%94%B3%E8%AF%B7.png "屏幕截图.png")
 # 查看进度
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/215111_daa20762_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%9F%A5%E7%9C%8B%E8%BF%9B%E5%BA%A6.png "屏幕截图.png")
 
 ```
 如果工作已有人员进行审核，进入工作流转后，用户不能编辑和删除该工作。
 ```
-# 分类列表
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/215241_0ddfdf98_526830.png "屏幕截图.png")
-
 ```
 企业管理人员可自定义工作类型
 ```
-# 创建分类
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0226/215327_b6d68790_526830.png "屏幕截图.png")
-
 # 班次管理
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/000240_b989ef4f_526830.png "屏幕截图.png")
-# 创建班次
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/000744_94606f69_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E7%8F%AD%E6%AC%A1%E7%AE%A1%E7%90%86.png "屏幕截图.png")
 # 排班管理
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/000253_690fd338_526830.png "屏幕截图.png")
-# 创建排班
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/000431_2633680a_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%8E%92%E7%8F%AD%E7%AE%A1%E7%90%86.png "屏幕截图.png")
 # 我的排班
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/000308_9ad22b89_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E6%88%91%E7%9A%84%E6%8E%92%E7%8F%AD.png "屏幕截图.png")
 # 签到列表
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/000332_a5c33cb7_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E7%AD%BE%E5%88%B0%E5%88%97%E8%A1%A8.png "屏幕截图.png")
 # 新建打卡
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0302/000352_ef4ebc29_526830.png "屏幕截图.png")
+![输入图片说明](https://wephp-unioa.oss-cn-shenzhen.aliyuncs.com/%E7%AD%BE%E5%88%B0%E6%89%93%E5%8D%A1.png "屏幕截图.png")
 
 #开始使用
 
